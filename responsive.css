@@ -28,12 +28,6 @@
     gap: 28px !important;
   }
 
-  /* Exception: keep the impact calculator's number keypad as a 3x grid. */
-  #impKeypad [style*="repeat(3"] {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px !important;
-  }
-
   /* 2) Tighten the big side padding and vertical section spacing. */
   [style*="padding:0 40px"] {
     padding-left: 22px !important;
@@ -56,7 +50,7 @@
         the big word, and drop the long paragraph on phones. */
   #top .hlabel-l { left: 20px !important; right: auto !important; max-width: 44vw !important; }
   #top .hlabel-r { right: 20px !important; left: auto !important; max-width: 44vw !important; }
-  #top .hbig { font-size: 24px !important; }
+  #top .hbig { font-size: 20px !important; white-space: nowrap !important; }
   #top .hdesc { display: none !important; }
 
   /* 5) Solution carousel: make each card fit the phone screen so a

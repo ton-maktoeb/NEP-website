@@ -131,6 +131,7 @@
     if (slider) {
       var MIN = 1, MAX = 50, TYPE_MAX = 1000000;
       var value = 3;
+      var typing = false; // true while the user is typing in the number field
       var fmt = function (n) { return n.toLocaleString("en-US").replace(/,/g, "."); };
       var fill = document.getElementById("impactFill");
       var thumb = document.getElementById("impactThumb");
@@ -144,14 +145,12 @@
         var animals = hens * (1 + IMPACT.malesPerHen);
         var nG = eggsYear * IMPACT.nSavedPerEggG;
         var pEl = document.getElementById("impPortions"); if (pEl) pEl.textContent = value;
-        var vBtn = document.getElementById("impValueBtn");
-        if (vBtn) {
-          var vTxt = value.toLocaleString("en-US").replace(/,/g, ".");
-          vBtn.textContent = vTxt;
-          vBtn.style.fontSize = vTxt.length <= 2 ? "26px" : (vTxt.length <= 4 ? "18px" : (vTxt.length <= 6 ? "14px" : "12px"));
-          vBtn.style.minWidth = "64px";
-          vBtn.style.width = "auto";
-          vBtn.style.padding = "0 10px";
+        // Show the value in the number field, unless the user is mid-typing.
+        var vInput = document.getElementById("impValueInput");
+        if (vInput && !typing) {
+          var vTxt = String(value);
+          vInput.value = vTxt;
+          vInput.style.fontSize = vTxt.length <= 2 ? "26px" : (vTxt.length <= 4 ? "18px" : (vTxt.length <= 6 ? "14px" : "12px"));
         }
         var hEl = document.getElementById("impHens"); if (hEl) hEl.textContent = fmt(Math.round(hens));
         var aEl = document.getElementById("impAnimals"); if (aEl) aEl.textContent = fmt(Math.round(animals));
@@ -169,48 +168,36 @@
         }
       };
       var setFromX = function (clientX) {
+        typing = false;
         var rect = slider.getBoundingClientRect();
         var t = (clientX - rect.left) / rect.width;
         t = Math.max(0, Math.min(1, t));
         value = Math.round(MIN + t * (MAX - MIN));
         updateImpact();
       };
-      // Click-based numeric keypad (type an exact number of portions).
-      var valueBtn = document.getElementById("impValueBtn");
-      var keypad = document.getElementById("impKeypad");
-      var echo = document.getElementById("impKeypadEcho");
-      if (valueBtn && keypad) {
-        var buffer = "";
-        var openKeypad = function () {
-          buffer = "";
-          if (echo) echo.textContent = value;
-          keypad.style.display = "block";
+      // Number field: type an exact value. On phones this opens the
+      // device's native numeric keyboard (inputmode="numeric").
+      var vInput = document.getElementById("impValueInput");
+      if (vInput) {
+        var commit = function () {
+          typing = false;
+          var digits = vInput.value.replace(/[^0-9]/g, "");
+          value = digits === "" ? MIN : Math.max(MIN, Math.min(TYPE_MAX, parseInt(digits, 10)));
+          updateImpact();
         };
-        var closeKeypad = function () {
-          keypad.style.display = "none";
-          if (buffer !== "") { value = Math.max(MIN, Math.min(TYPE_MAX, parseInt(buffer, 10) || MIN)); updateImpact(); }
-          buffer = "";
-        };
-        valueBtn.addEventListener("click", function (e) {
-          e.stopPropagation();
-          if (keypad.style.display === "block") closeKeypad(); else openKeypad();
+        vInput.addEventListener("focus", function () { typing = true; vInput.select(); });
+        vInput.addEventListener("input", function () {
+          typing = true;
+          var digits = vInput.value.replace(/[^0-9]/g, "");
+          if (digits === "") return; // wait until there's a number to read
+          value = Math.max(MIN, Math.min(TYPE_MAX, parseInt(digits, 10)));
+          updateImpact(); // update the results live without overwriting what they're typing
         });
-        keypad.addEventListener("click", function (e) { e.stopPropagation(); });
-        keypad.querySelectorAll("[data-key]").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            var k = btn.getAttribute("data-key");
-            if (k === "done") { closeKeypad(); return; }
-            if (k === "back") { buffer = buffer.slice(0, -1); }
-            else if (k === "clear") { buffer = ""; }
-            else { if (buffer.length < 7) buffer += k; }
-            var preview = buffer === "" ? 0 : Math.min(TYPE_MAX, parseInt(buffer, 10));
-            if (echo) echo.textContent = buffer === "" ? "0" : preview.toLocaleString("en-US").replace(/,/g, ".");
-            if (buffer !== "") { value = Math.max(MIN, Math.min(TYPE_MAX, parseInt(buffer, 10))); updateImpact(); }
-          });
-        });
-        document.addEventListener("click", function () { if (keypad.style.display === "block") closeKeypad(); });
+        vInput.addEventListener("blur", commit);
+        vInput.addEventListener("change", commit);
+        vInput.addEventListener("keydown", function (e) { if (e.key === "Enter") vInput.blur(); });
       }
-      var stepBy = function (d) { value = Math.max(MIN, Math.min(MAX, value + d)); updateImpact(); };
+      var stepBy = function (d) { typing = false; value = Math.max(MIN, Math.min(MAX, value + d)); updateImpact(); };
       var minusBtn = document.getElementById("impMinus");
       var plusBtn = document.getElementById("impPlus");
       if (minusBtn) minusBtn.addEventListener("click", function () { stepBy(-1); });
