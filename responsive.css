@@ -57,6 +57,24 @@
         whole card is visible at a time (it still swipes sideways). */
   #solTrack > div { flex-basis: 86% !important; }
 
+  /* 5b) Product photos: turn the desktop grid into a swipe carousel.
+         Each photo becomes an equal slide; the next one peeks at the
+         edge to signal there's more to swipe. */
+  .prod-media {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px !important;
+    scrollbar-width: none;
+  }
+  .prod-media::-webkit-scrollbar { display: none; }
+  .prod-slide {
+    flex: 0 0 85% !important;
+    height: 300px !important;
+    scroll-snap-align: center;
+  }
+
   /* 6) Methodology: let the 4-column coefficient table scroll
         sideways instead of squashing its columns. */
   .mtable { overflow-x: auto !important; }
