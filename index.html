@@ -62,12 +62,23 @@
   <!-- ===== NAV (fixed, sticky) ===== -->
   <div id="nmnav" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;height:112px;padding:0 40px;background:transparent;transition:background .28s ease,box-shadow .28s ease,border-color .28s ease;border-bottom:1px solid transparent">
     <a href="#top" style="display:flex;align-items:center;text-decoration:none"><img src="assets/logo-noegg-lime-plant-white.png" alt="NoEggPlant" style="height:104px;width:auto;display:block"></a>
-    <div style="display:flex;align-items:center;gap:30px">
+    <div id="navLinks" style="display:flex;align-items:center;gap:30px">
       <a href="#problem" data-spy="problem" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Problem</a>
       <a href="#solution" data-spy="solution" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Solution</a>
       <a href="#product" data-spy="product" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Product</a>
       <a href="#about" data-spy="about" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Story</a>
     </div>
+    <button id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" style="display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;padding:0;background:transparent;border:0;cursor:pointer">
+      <span style="display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .2s ease,opacity .2s ease"></span>
+      <span style="display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .2s ease,opacity .2s ease"></span>
+      <span style="display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .2s ease,opacity .2s ease"></span>
+    </button>
+  </div>
+  <div id="mobileMenu" style="display:none;position:fixed;top:74px;left:0;right:0;z-index:49;background:rgba(25,4,31,.98);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid rgba(241,252,122,.16);padding:8px 20px 16px;box-shadow:0 14px 30px rgba(20,4,24,.5)">
+    <a href="#problem" style="display:block;padding:15px 4px;color:#fff;font:600 17px/1 'Poppins',sans-serif;text-decoration:none;border-bottom:1px solid rgba(241,252,122,.12)">The Problem</a>
+    <a href="#solution" style="display:block;padding:15px 4px;color:#fff;font:600 17px/1 'Poppins',sans-serif;text-decoration:none;border-bottom:1px solid rgba(241,252,122,.12)">The Solution</a>
+    <a href="#product" style="display:block;padding:15px 4px;color:#fff;font:600 17px/1 'Poppins',sans-serif;text-decoration:none;border-bottom:1px solid rgba(241,252,122,.12)">The Product</a>
+    <a href="#about" style="display:block;padding:15px 4px;color:#fff;font:600 17px/1 'Poppins',sans-serif;text-decoration:none">The Story</a>
   </div>
 
   <!-- ===== CENTER HEADLINE ===== -->

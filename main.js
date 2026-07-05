@@ -82,6 +82,33 @@
       }, { threshold: 0 }).observe(sentinel);
     }
 
+    // Mobile hamburger menu: toggle the dropdown, animate the icon to an X,
+    // and close it after a link is tapped or when tapping outside.
+    var navToggle = document.getElementById("navToggle");
+    var mobileMenu = document.getElementById("mobileMenu");
+    if (navToggle && mobileMenu) {
+      var bars = navToggle.querySelectorAll("span");
+      var menuOpen = false;
+      var setMenu = function (open) {
+        menuOpen = open;
+        mobileMenu.style.display = open ? "block" : "none";
+        navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        if (bars.length === 3) {
+          bars[0].style.transform = open ? "translateY(7px) rotate(45deg)" : "none";
+          bars[1].style.opacity = open ? "0" : "1";
+          bars[2].style.transform = open ? "translateY(-7px) rotate(-45deg)" : "none";
+        }
+      };
+      navToggle.addEventListener("click", function (e) { e.stopPropagation(); setMenu(!menuOpen); });
+      mobileMenu.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", function () { setMenu(false); });
+      });
+      document.addEventListener("click", function (e) {
+        if (menuOpen && !mobileMenu.contains(e.target) && !navToggle.contains(e.target)) setMenu(false);
+      });
+    }
+
     // Scroll reveals: fade sections in as they enter the viewport.
     var els = document.querySelectorAll("[data-reveal]");
     if ("IntersectionObserver" in window) {

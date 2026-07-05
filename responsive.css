@@ -38,12 +38,12 @@
     padding-bottom: 76px !important;
   }
 
-  /* 3) Hero nav: shrink the logo and hide the inline menu links on
-        phones (the page is one long scroll and the footer repeats
-        every link). */
+  /* 3) Hero nav: shrink the logo, swap the inline links for a
+        hamburger button that opens the dropdown menu. */
   #nmnav { height: 74px !important; padding: 0 20px !important; }
   #nmnav img { height: 58px !important; }
-  #nmnav > div { display: none !important; }
+  #navLinks { display: none !important; }   /* hide the desktop links */
+  #navToggle { display: flex !important; }  /* show the hamburger */
 
   /* 4) Hero bottom labels: stop "Takes" / "Gives back" and their
         paragraphs overlapping. Narrow each to its own half, shrink
@@ -61,4 +61,10 @@
         sideways instead of squashing its columns. */
   .mtable { overflow-x: auto !important; }
   .mtable > div { min-width: 560px; }
+}
+
+/* On desktop, never show the mobile-only hamburger or its menu
+   (guards against it lingering if the window is resized larger). */
+@media (min-width: 769px) {
+  #navToggle, #mobileMenu { display: none !important; }
 }
