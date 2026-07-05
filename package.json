@@ -1,0 +1,9 @@
+{
+  "name": "nep-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NoEggPlant marketing site (static) with a pre-launch password gate.",
+  "dependencies": {
+    "@vercel/edge": "^1.2.1"
+  }
+}
