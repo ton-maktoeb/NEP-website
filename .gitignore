@@ -4,6 +4,10 @@ node_modules/
 # Vercel
 .vercel/
 
+# Private — NEVER commit secrets / passwords
+*-PRIVATE.txt
+NEP-passwords-PRIVATE.txt
+
 # OS / editor junk
 .DS_Store
 Thumbs.db
