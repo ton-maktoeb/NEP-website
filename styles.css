@@ -1,0 +1,147 @@
+/* ============================================================
+   NO MAD PLANT CO. — Colors & Type Foundations
+   Next-gen plant-forward foodservice. Bold, electric, craveable.
+   ------------------------------------------------------------
+   Palette: AUBERGINE (#26072E) + LIME (#F1FC7A) on white/black.
+   Type: POPPINS (display + body), self-hosted from /fonts.
+   Mono accents use Spline Sans Mono via CDN.
+   ============================================================ */
+
+/* ---------- SELF-HOSTED BRAND FONT: Poppins ---------- */
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 100;
+  src: url("fonts/Poppins-Thin.ttf") format("truetype"); font-display: swap;
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 400;
+  src: url("fonts/Poppins-Regular.ttf") format("truetype"); font-display: swap;
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 500;
+  src: url("fonts/Poppins-Medium.ttf") format("truetype"); font-display: swap;
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 700;
+  src: url("fonts/Poppins-Bold.ttf") format("truetype"); font-display: swap;
+}
+@font-face {
+  font-family: "Poppins"; font-style: italic; font-weight: 700;
+  src: url("fonts/Poppins-BoldItalic.ttf") format("truetype"); font-display: swap;
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 800;
+  src: url("fonts/Poppins-ExtraBold.ttf") format("truetype"); font-display: swap;
+}
+@font-face {
+  font-family: "Poppins"; font-style: normal; font-weight: 900;
+  src: url("fonts/Poppins-Black.ttf") format("truetype"); font-display: swap;
+}
+@font-face {
+  font-family: "Poppins"; font-style: italic; font-weight: 900;
+  src: url("fonts/Poppins-BlackItalic.ttf") format("truetype"); font-display: swap;
+}
+
+:root {
+  /* ---------- CORE NEUTRALS (aubergine-led) ---------- */
+  --black:          #000000; /* max-contrast text / lines */
+  --ink:            #26072E; /* AUBERGINE — primary brand dark, text & dark bg */
+  --aubergine:      #26072E;
+  --aubergine-deep: #19041F; /* deepest layer */
+  --ink-2:          #2F0E38; /* raised dark surface */
+  --aubergine-700:  #3D1A47; /* card on dark / hover */
+  --aubergine-600:  #512A5C; /* borders / muted on dark */
+  --plum:           #6E5C77; /* muted text on white */
+  --plum-faint:     #9C8FA4; /* faint text / captions */
+  --white:          #FFFFFF; /* primary surface */
+  --paper:          #F7F3F9; /* tinted off-white bg */
+  --paper-2:        #EFE9F2; /* deeper surface / inset */
+  --paper-3:        #E5DCEA; /* hairline borders on light */
+
+  /* ---------- ACCENT (the signature) ---------- */
+  --lime:       #F1FC7A; /* SIGNATURE accent — CTAs, highlights, on-dark pops */
+  --lime-deep:  #DCE85C; /* hover / press */
+  --lime-dim:   #E8F39A; /* soft lime tint background */
+  --on-lime:    #26072E; /* aubergine text on lime */
+
+  /* ---------- SEMANTIC: text ---------- */
+  --fg1: var(--aubergine);    /* primary text on white */
+  --fg2: var(--plum);         /* muted text */
+  --fg3: var(--plum-faint);   /* faint / captions */
+  --fg-on-dark:  #FFFFFF;
+  --fg-on-dark-2:#C9B9D0;
+
+  /* ---------- SEMANTIC: surface ---------- */
+  --bg:        var(--white);
+  --bg-card:   #FCFAFD;
+  --bg-inset:  var(--paper-2);
+  --bg-dark:   var(--aubergine);
+  --bg-dark-2: var(--aubergine-deep);
+  --border:    var(--paper-3);
+  --border-strong: #D6C9DE;
+  --border-dark: rgba(241,252,122,0.18); /* lime hairline on dark */
+
+  /* ---------- SEMANTIC: brand roles ---------- */
+  --accent:        var(--lime);      /* fills / highlights only (never small text on white) */
+  --accent-press:  var(--lime-deep);
+  --on-accent:     var(--aubergine);
+  --eyebrow:       var(--aubergine); /* eyebrow text on light; use --lime on dark */
+
+  /* ---------- RADII ---------- */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+
+  /* ---------- SHADOWS (aubergine-tinted, soft) ---------- */
+  --shadow-sm: 0 1px 2px rgba(38,7,46,0.07), 0 1px 1px rgba(38,7,46,0.05);
+  --shadow-md: 0 4px 14px rgba(38,7,46,0.12), 0 2px 4px rgba(38,7,46,0.07);
+  --shadow-lg: 0 18px 50px rgba(25,4,31,0.22), 0 6px 14px rgba(25,4,31,0.12);
+
+  /* ---------- SPACING SCALE (4px base) ---------- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  /* ---------- TYPE: families ---------- */
+  --font-display: "Poppins", system-ui, sans-serif;
+  --font-body:    "Poppins", system-ui, sans-serif;
+  --font-mono:    "Spline Sans Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ---------- TYPE: weights ----------
+     Poppins is self-hosted at 100 / 400 / 500 / 700 / 800 / 900.
+     600 (semibold) falls back to the nearest face — use 700 or 800. */
+  --w-regular: 400;
+  --w-medium:  500;
+  --w-semi:    700;
+  --w-bold:    700;
+  --w-black:   900;
+
+  /* ---------- TYPE: fluid display sizes ---------- */
+  --t-display: 900 clamp(3rem, 7vw, 6rem)/0.92 var(--font-display);
+  --t-h1: 800 clamp(2.25rem, 4.5vw, 3.75rem)/0.98 var(--font-display);
+  --t-h2: 800 clamp(1.75rem, 3vw, 2.5rem)/1.04 var(--font-display);
+  --t-h3: 700 1.5rem/1.15 var(--font-display);
+  --t-h4: 700 1.175rem/1.25 var(--font-display);
+  --t-lead: 500 clamp(1.05rem,1.6vw,1.3rem)/1.5 var(--font-body);
+  --t-body: 400 1rem/1.6 var(--font-body);
+  --t-small: 400 0.875rem/1.55 var(--font-body);
+  --t-eyebrow: 800 0.75rem/1 var(--font-display);
+  --eyebrow-tracking: 0.18em;
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT DEFAULTS (opt-in via .nm-prose or use vars)
+   ============================================================ */
+.nm-display { font: var(--t-display); letter-spacing: -0.02em; text-transform: uppercase; color: var(--fg1); }
+.nm-h1 { font: var(--t-h1); letter-spacing: -0.015em; color: var(--fg1); }
+.nm-h2 { font: var(--t-h2); letter-spacing: -0.01em; color: var(--fg1); }
+.nm-h3 { font: var(--t-h3); letter-spacing: -0.005em; color: var(--fg1); }
+.nm-h4 { font: var(--t-h4); color: var(--fg1); }
+.nm-lead { font: var(--t-lead); color: var(--fg2); }
+.nm-body { font: var(--t-body); color: var(--fg1); }
+.nm-small { font: var(--t-small); color: var(--fg2); }
+.nm-eyebrow {
+  font: var(--t-eyebrow); letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase; color: var(--eyebrow);
+}
+.nm-mono { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.01em; }

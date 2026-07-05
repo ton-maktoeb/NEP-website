@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NoEggPlant — Scramble. No chicken required.</title>
+<meta name="description" content="Plant-based scramble made from lupin. The taste you know, without the animal that suffers for it. Better for the soil, the bees, and our independence.">
+<link rel="icon" href="assets/logo-noegg-lime-plant-ink.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500&display=swap">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{cursor:url("assets/cursor-bean.png") 20 20, auto}
+  a,button,label,[role="button"],summary{cursor:url("assets/cursor-bean.png") 20 20, pointer}
+  input,textarea{cursor:text}
+  body{margin:0;font-family:"Poppins",system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:#160419}
+  ::selection{background:#F1FC7A;color:#26072E}
+  @keyframes nm-spin{to{transform:rotate(360deg)}}
+  @keyframes nm-spin-rev{to{transform:rotate(-360deg)}}
+  @keyframes nm-flow{to{stroke-dashoffset:-1000}}
+  @keyframes nm-orbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes nm-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @keyframes nm-sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+  @keyframes nm-pulse{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.7;transform:scale(1.06)}}
+  @keyframes nm-kenburns{0%{transform:scale(1.08) translate(0,0)}100%{transform:scale(1.32) translate(-6%,-7%)}}
+  @keyframes nm-bloom{0%{transform:scale(1.02) translate(0,0)}100%{transform:scale(1.22) translate(-5%,3%)}}
+  @keyframes nm-trail{to{stroke-dashoffset:-7}}
+  #contactForm input::placeholder,#contactForm textarea::placeholder{color:#9C8FA4}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</style>
+</head>
+<body>
+
+<section id="top" style="position:relative;height:100vh;min-height:720px;overflow:hidden;background:#160419;font-family:'Poppins',sans-serif">
+
+  <div id="nmsentinel" style="position:absolute;top:100px;left:0;width:1px;height:1px;pointer-events:none"></div>
+
+  <!-- ===== SPLIT VIDEO PANELS ===== -->
+  <div style="position:absolute;inset:0;display:flex">
+    <!-- LEFT — the hen (Pexels: free-range chickens foraging) -->
+    <div style="position:relative;flex:1;overflow:hidden;background:radial-gradient(125% 100% at 32% 28%, #3a1342 0%, #20082a 58%, #160419 100%)">
+      <video autoplay="" muted="" loop="" playsinline="" poster="https://images.pexels.com/videos/856986/free-video-856986.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+        <source src="https://videos.pexels.com/video-files/856986/856986-hd_1920_1080_25fps.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- RIGHT — the lupin (real edible-lupin crop; Lekker Lupine) -->
+    <div style="position:relative;flex:1;overflow:hidden;background:#2c3a1e">
+      <video src="assets/lupin-field.mp4" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(1.22) contrast(1.05) brightness(1.02)"></video>
+      <div style="position:absolute;top:0;left:0;right:0;height:62%;pointer-events:none;background:linear-gradient(180deg,rgba(64,140,224,.62) 0%,rgba(96,160,228,.34) 34%,rgba(120,170,220,.12) 68%,rgba(120,170,220,0) 100%);mix-blend-mode:soft-light"></div>
+    </div>
+  </div>
+
+  <!-- unify grade + protection gradients -->
+  <div style="position:absolute;inset:0;pointer-events:none;background:rgba(38,7,46,.22)"></div>
+  <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,4,24,.52) 0%,rgba(20,4,24,.09) 21%,rgba(20,4,24,.14) 49%,rgba(20,4,24,.12) 66%,rgba(20,4,24,.79) 100%)"></div>
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(79% 63% at 50% 48%, rgba(20,4,24,.40) 0%, rgba(20,4,24,0) 69%)"></div>
+  <!-- center lime seam -->
+  <div style="position:absolute;top:0;bottom:0;left:50%;width:2.8px;transform:translateX(-1.4px);background:rgba(241,252,122,.30);pointer-events:none"></div>
+
+  <!-- ===== NAV (fixed, sticky) ===== -->
+  <div id="nmnav" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;height:112px;padding:0 40px;background:transparent;transition:background .28s ease,box-shadow .28s ease,border-color .28s ease;border-bottom:1px solid transparent">
+    <a href="#top" style="display:flex;align-items:center;text-decoration:none"><img src="assets/logo-noegg-lime-plant-white.png" alt="NoEggPlant" style="height:104px;width:auto;display:block"></a>
+    <div style="display:flex;align-items:center;gap:30px">
+      <a href="#problem" data-spy="problem" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Problem</a>
+      <a href="#solution" data-spy="solution" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Solution</a>
+      <a href="#product" data-spy="product" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Product</a>
+      <a href="#about" data-spy="about" style="color:rgba(255,255,255,.9);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:6px;text-decoration-thickness:2px;transition:color .15s,text-decoration-color .15s">The Story</a>
+    </div>
+  </div>
+
+  <!-- ===== CENTER HEADLINE ===== -->
+  <div style="position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40px">
+    <div style="font:800 16px/1 'Poppins',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#F1FC7A">Choose what you feed</div>
+    <h1 style="margin:18px 0 0">
+      <span style="display:block;font:900 clamp(64px,9vw,120px)/0.84 'Poppins',sans-serif;letter-spacing:-.035em;text-transform:uppercase;color:#fff;text-shadow:0 2px 30px rgba(20,4,24,.5)">Scramble.</span>
+      <span style="display:block;font:900 clamp(26px,3.6vw,46px)/1.05 'Poppins',sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:#fff;margin-top:14px;text-shadow:0 2px 20px rgba(20,4,24,.6)"><span style="color:#F1FC7A">No chicken</span> required.</span>
+    </h1>
+    <p style="font:500 19px/1.5 'Poppins',sans-serif;color:#EDE3F0;max-width:600px;margin:24px auto 0;text-shadow:0 1px 14px rgba(20,4,24,.6)">Same taste. Same scramble. One side only takes. The other gives it all back. So switching to lupin isn't a sacrifice. <span style="display:block;white-space:nowrap;margin-top:6px">It's the obvious move.</span></p>
+  </div>
+
+  <!-- ===== SIDE LABELS ===== -->
+  <div style="position:absolute;left:40px;bottom:38px;z-index:4;max-width:340px">
+    <div style="font:800 18px/1 'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#F1FC7A;text-shadow:0 1px 10px rgba(20,4,24,.6)">The hen</div>
+    <div style="display:flex;align-items:center;gap:11px;margin-top:9px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;border:1.5px solid rgba(255,255,255,.45);color:#fff;font:700 19px/1 'Poppins',sans-serif;flex:0 0 auto">−</span>
+      <span style="font:900 40px/0.88 'Poppins',sans-serif;letter-spacing:-.025em;text-transform:uppercase;color:#fff">Takes</span>
+    </div>
+    <div style="font:500 14px/1.45 'Poppins',sans-serif;color:#C9B9D0;margin-top:11px">A quarter of farming's fine dust. Its largest source of ammonia. Feed shipped halfway round the world. And still, a life ends for an egg.</div>
+  </div>
+  <div style="position:absolute;right:40px;bottom:38px;z-index:4;max-width:340px;text-align:right">
+    <div style="font:800 18px/1 'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#F1FC7A;text-shadow:0 1px 10px rgba(20,4,24,.6)">The lupin</div>
+    <div style="display:flex;align-items:center;justify-content:flex-end;gap:11px;margin-top:9px">
+      <span style="font:900 40px/0.88 'Poppins',sans-serif;letter-spacing:-.025em;text-transform:uppercase;color:#fff">Gives back</span>
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;border:1.5px solid rgba(255,255,255,.45);color:#fff;font:700 19px/1 'Poppins',sans-serif;flex:0 0 auto">+</span>
+    </div>
+    <div style="font:500 14px/1.45 'Poppins',sans-serif;color:#D9CCDE;margin-top:11px">Nitrogen pulled into the soil. Food for wild bees. Grown on home ground, no import. And the very same scramble.</div>
+  </div>
+
+</section>
+
+<!-- ===================== THE PROBLEM ===================== -->
+<section id="problem" style="background:#F7F3F9;color:#26072E;padding:120px 0;scroll-margin-top:112px;font-family:'Poppins',sans-serif">
+  <div data-reveal="" style="max-width:1180px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div>
+      <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#26072E">The problem</div>
+      <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#26072E;margin:16px 0 0">An egg costs more than you pay.</h2>
+      <p style="font:500 clamp(18px,1.7vw,21px)/1.5 'Poppins',sans-serif;color:#6E5C77;margin:18px 0 0;max-width:520px">Animal suffering, emissions, and dependence. Packed into every carton.</p>
+      <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#6E5C77;margin:18px 0 0;max-width:520px">Behind every egg is a hen we raise, feed, and ultimately send to slaughter. The barns release ammonia and fine dust, and the feed travels halfway around the world. We're so used to it that we've stopped seeing the price.</p>
+      <div style="margin-top:24px;max-width:520px;background:#fff;border:1px solid #E5DCEA;border-left:4px solid #26072E;border-radius:12px;padding:20px 22px">
+        <div style="font:800 11px/1 'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#26072E">Even at its best</div>
+        <p style="font:500 15.5px/1.65 'Poppins',sans-serif;color:#3D1A47;margin:11px 0 0">Even the most sustainable egg farm, one that runs on solar, feeds its hens on food-industry leftovers and slashes emissions, still <b>takes</b> from the earth. It can lighten the load, but it never gives fertility back. <b style="color:#26072E;box-shadow:inset 0 -0.5em 0 #F1FC7A">A lupin field does.</b></p>
+      </div>
+      <div style="margin-top:30px;display:flex;flex-direction:column;gap:13px;border-top:1px solid #E5DCEA;padding-top:24px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:8px;height:8px;border-radius:50%;background:#26072E;margin-top:6px;flex:0 0 auto"></span><span style="font:500 14px/1.5 'Poppins',sans-serif;color:#6E5C77">Poultry farms account for roughly a quarter of all fine-dust emissions in Dutch agriculture.</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:8px;height:8px;border-radius:50%;background:#26072E;margin-top:6px;flex:0 0 auto"></span><span style="font:500 14px/1.5 'Poppins',sans-serif;color:#6E5C77">Ammonia is the single largest gaseous emission in poultry farming.</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:8px;height:8px;border-radius:50%;background:#26072E;margin-top:6px;flex:0 0 auto"></span><span style="font:500 14px/1.5 'Poppins',sans-serif;color:#6E5C77">Laying hens are fed imported soy. After China, the Netherlands is the world's largest soy importer, so every egg carries a footprint shipped in from overseas.</span></div>
+      </div>
+    </div>
+    <div style="width:100%;height:520px;display:block;box-shadow:0 18px 50px rgba(25,4,31,.18);border-radius:10px;overflow:hidden"><img src="https://images.pexels.com/videos/856986/free-video-856986.jpg" alt="Hens in an intensive poultry barn" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+  </div>
+</section>
+
+<!-- ===================== THE SOLUTION ===================== -->
+<section id="solution" style="position:relative;background:#26072E;color:#fff;padding:140px 0;scroll-margin-top:112px;overflow:hidden;font-family:'Poppins',sans-serif">
+  <div aria-hidden="true" style="position:absolute;top:-80px;right:-60px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle, rgba(241,252,122,.12) 0%, rgba(241,252,122,0) 70%);pointer-events:none"></div>
+  <div data-reveal="" style="position:relative;max-width:1180px;margin:0 auto;padding:0 40px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div style="max-width:760px">
+      <div style="font:800 13px/1 'Poppins',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#F1FC7A">The solution</div>
+      <h2 style="font:900 clamp(40px,5.4vw,72px)/0.96 'Poppins',sans-serif;letter-spacing:-.025em;text-transform:uppercase;color:#fff;margin:18px 0 0">One bean.<br>Three ways to <span style="color:#F1FC7A">win.</span></h2>
+      <p style="font:500 clamp(18px,1.8vw,22px)/1.5 'Poppins',sans-serif;color:#D9CCDE;margin:22px 0 0;max-width:560px"><span style="color:#26072E;background:#F1FC7A;padding:1px 8px;border-radius:4px;font-weight:800">Lupin</span> doesn't just do less harm. It actively gives back. Better for the soil, for biodiversity, and for our independence.</p>
+    </div>
+    <div style="position:relative;margin-top:56px">
+     <div id="solTrack" style="display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:4px">
+
+      <!-- SOIL -->
+      <div style="flex:0 0 min(420px,82%);scroll-snap-align:start;background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;overflow:hidden;transition:transform .22s cubic-bezier(.22,.61,.36,1),border-color .22s,box-shadow .22s" style-hover="transform:translateY(-6px);border-color:rgba(241,252,122,.5);box-shadow:0 22px 50px rgba(0,0,0,.32)">
+        <div style="position:relative;height:200px">
+          <div style="position:absolute;inset:0;background:url('assets/soil-founders-field.jpg') center/cover"></div>
+          <span style="position:absolute;top:14px;right:16px;font:900 34px/1 'Poppins',sans-serif;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.55)">01</span>
+          <svg viewBox="0 0 88 88" width="64" height="64" aria-hidden="true" style="position:absolute;left:24px;bottom:-22px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4))">
+            <path d="M34 -11 C 42 3 35 19 23 27 C 11 35 -6 37 -19 30 C -33 22 -39 6 -34 -9 C -30 -23 -22 -34 -8 -36 C 7 -38 26 -25 34 -11 Z" fill="#F1FC7A" transform="translate(44 44) rotate(6)"></path>
+            <svg x="28" y="28" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#26072E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 20h10"></path>
+              <path d="M10 20c5.5-2.5.8-6.4 3-10"></path>
+              <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"></path>
+              <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"></path>
+            </svg>
+          </svg>
+        </div>
+        <div style="padding:40px 30px 32px">
+          <div style="font:800 12px/1 'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#F1FC7A">Soil</div>
+          <div style="font:800 24px/1.15 'Poppins',sans-serif;color:#fff;margin-top:10px">Feeds the ground</div>
+          <p style="font:400 15.5px/1.6 'Poppins',sans-serif;color:#C9B9D0;margin:12px 0 0">Lupin pulls nitrogen straight from the air and stores it in the soil for the next crop.</p>
+        </div>
+      </div>
+
+      <!-- BEES -->
+      <div style="flex:0 0 min(420px,82%);scroll-snap-align:start;background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;overflow:hidden;transition:transform .22s cubic-bezier(.22,.61,.36,1),border-color .22s,box-shadow .22s" style-hover="transform:translateY(-6px);border-color:rgba(241,252,122,.5);box-shadow:0 22px 50px rgba(0,0,0,.32)">
+        <div style="position:relative;height:200px">
+          <div style="position:absolute;inset:0;background:url('assets/lupin-flower-bee.jpg') center/cover"></div>
+          <span style="position:absolute;top:14px;right:16px;font:900 34px/1 'Poppins',sans-serif;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.55)">02</span>
+          <svg viewBox="0 0 88 88" width="64" height="64" aria-hidden="true" style="position:absolute;left:24px;bottom:-22px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4))">
+            <path d="M30 -19 C 41 -9 40 9 32 22 C 25 34 7 38 -7 35 C -22 32 -36 23 -37 8 C -38 -8 -27 -20 -15 -28 C -2 -36 19 -29 30 -19 Z" fill="#F1FC7A" transform="translate(44 44) rotate(60)"></path>
+            <svg x="27" y="27" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#26072E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="transform-box:view-box;transform-origin:50% 50%;animation:nm-float 4.8s ease-in-out infinite">
+              <path d="M2.5 22 C 4 17 7 16 8 13.5 C 9 11 6.4 9.8 5.4 12 C 4.5 14 7.6 15 9 12 C 10.3 9.4 11.5 9 12 9" stroke-dasharray="0.1 3.4" stroke-width="1.6" opacity="0.85" style="animation:nm-trail 2.2s linear infinite"></path>
+              <ellipse cx="6.6" cy="10" rx="3" ry="4.6" transform="rotate(-25 6.6 10)"></ellipse>
+              <ellipse cx="17.4" cy="10" rx="3" ry="4.6" transform="rotate(25 17.4 10)"></ellipse>
+              <ellipse cx="12" cy="14" rx="4.4" ry="6"></ellipse>
+              <path d="M7.9 12.6h8.2"></path>
+              <path d="M8.1 16h7.8"></path>
+              <circle cx="12" cy="5.6" r="2.1"></circle>
+              <path d="M10.6 4.2 9.2 2.4"></path>
+              <path d="M13.4 4.2 14.8 2.4"></path>
+            </svg>
+          </svg>
+        </div>
+        <div style="padding:40px 30px 32px">
+          <div style="font:800 12px/1 'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#F1FC7A">Biodiversity</div>
+          <div style="font:800 24px/1.15 'Poppins',sans-serif;color:#fff;margin-top:10px">Feeds the bees</div>
+          <p style="font:400 15.5px/1.6 'Poppins',sans-serif;color:#C9B9D0;margin:12px 0 0">In bloom, a lupin field hums with wild bees and insects, bringing life back to the land.</p>
+        </div>
+      </div>
+
+      <!-- INDEPENDENCE -->
+      <div style="flex:0 0 min(420px,82%);scroll-snap-align:start;background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;overflow:hidden;transition:transform .22s cubic-bezier(.22,.61,.36,1),border-color .22s,box-shadow .22s" style-hover="transform:translateY(-6px);border-color:rgba(241,252,122,.5);box-shadow:0 22px 50px rgba(0,0,0,.32)">
+        <div style="position:relative;height:200px">
+          <div style="position:absolute;inset:0;background:url('assets/lupin-bean-pod.jpg') center/cover"></div>
+          <span style="position:absolute;top:14px;right:16px;font:900 34px/1 'Poppins',sans-serif;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.55)">03</span>
+          <svg viewBox="0 0 88 88" width="64" height="64" aria-hidden="true" style="position:absolute;left:24px;bottom:-22px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4))">
+            <path d="M33 -5 C 39 10 35 27 21 33 C 6 40 -12 35 -24 26 C -35 17 -38 1 -31 -13 C -24 -27 -11 -36 3 -35 C 17 -34 27 -20 33 -5 Z" fill="#F1FC7A" transform="translate(44 44) rotate(205)"></path>
+            <svg x="28" y="28" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#26072E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </svg>
+        </div>
+        <div style="padding:40px 30px 32px">
+          <div style="font:800 12px/1 'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#F1FC7A">Independence</div>
+          <div style="font:800 24px/1.15 'Poppins',sans-serif;color:#fff;margin-top:10px">Grown at home</div>
+          <p style="font:400 15.5px/1.6 'Poppins',sans-serif;color:#C9B9D0;margin:12px 0 0">Lupin grows right here, on home soil. No ocean freight, no imported feed. Sovereign, and independent of geopolitics.</p>
+        </div>
+      </div>
+     </div>
+
+     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:24px">
+       <div id="solDots" style="display:flex;gap:9px">
+         <button data-sol-dot="0" aria-label="Show card 1" style="width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#F1FC7A;cursor:pointer;transition:background .2s,width .2s"></button>
+         <button data-sol-dot="1" aria-label="Show card 2" style="width:9px;height:9px;padding:0;border:0;border-radius:50%;background:rgba(241,252,122,.28);cursor:pointer;transition:background .2s,width .2s"></button>
+         <button data-sol-dot="2" aria-label="Show card 3" style="width:9px;height:9px;padding:0;border:0;border-radius:50%;background:rgba(241,252,122,.28);cursor:pointer;transition:background .2s,width .2s"></button>
+       </div>
+       <div style="display:flex;gap:10px">
+         <button id="solPrev" aria-label="Previous" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(241,252,122,.4);background:transparent;color:#F1FC7A;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s,color .18s" style-hover="background:#F1FC7A;color:#26072E">
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+         </button>
+         <button id="solNext" aria-label="Next" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(241,252,122,.4);background:transparent;color:#F1FC7A;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s,color .18s" style-hover="background:#F1FC7A;color:#26072E">
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+         </button>
+       </div>
+     </div>
+    </div>
+    <div style="margin-top:80px;padding-top:56px;border-top:1px solid rgba(241,252,122,.14)">
+      <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center">
+      <div>
+        <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">The impact</div>
+        <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:16px 0 0">Every switch adds up.</h2>
+        <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#D9CCDE;margin:18px 0 0;max-width:480px">Swap chicken eggs for lupin scramble and two things change: hens no longer live and die for your breakfast, and reactive nitrogen stops leaking into air and water. Move the slider to see what your own switch is worth in a year.</p>
+
+        <div style="margin-top:34px;background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;padding:26px 28px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <label for="impPortionsInput" style="font:800 12px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F1FC7A">Portions of scramble per week</label>
+            <div style="position:relative;display:flex;align-items:center;gap:8px">
+              <button id="impMinus" type="button" aria-label="One fewer portion" style="width:38px;height:44px;flex:0 0 auto;border-radius:8px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;font:800 22px/1 'Poppins',sans-serif;cursor:pointer;transition:background .15s,color .15s" style-hover="background:#F1FC7A;color:#26072E">&minus;</button>
+              <button id="impValueBtn" type="button" aria-label="Type a number of portions" style="width:64px;height:44px;flex:0 0 auto;background:#26072E;border:1px solid rgba(241,252,122,.35);border-radius:8px;color:#fff;font:900 26px/1 'Poppins',sans-serif;text-align:center;cursor:pointer;transition:border-color .15s" style-hover="border-color:#F1FC7A">3</button>
+              <button id="impPlus" type="button" aria-label="One more portion" style="width:38px;height:44px;flex:0 0 auto;border-radius:8px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;font:800 22px/1 'Poppins',sans-serif;cursor:pointer;transition:background .15s,color .15s" style-hover="background:#F1FC7A;color:#26072E">+</button>
+              <span id="impPortions" style="display:none">3</span>
+              <div id="impKeypad" style="display:none;position:absolute;top:52px;right:0;z-index:40;background:#26072E;border:1px solid rgba(241,252,122,.35);border-radius:12px;padding:12px;box-shadow:0 20px 48px rgba(0,0,0,.45);width:184px">
+                <div id="impKeypadEcho" style="font:900 22px/1 'Poppins',sans-serif;color:#fff;text-align:center;background:#160419;border-radius:8px;padding:10px 0;margin-bottom:10px;letter-spacing:.04em">3</div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+                  <button data-key="1" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">1</button>
+                  <button data-key="2" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">2</button>
+                  <button data-key="3" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">3</button>
+                  <button data-key="4" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">4</button>
+                  <button data-key="5" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">5</button>
+                  <button data-key="6" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">6</button>
+                  <button data-key="7" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">7</button>
+                  <button data-key="8" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">8</button>
+                  <button data-key="9" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">9</button>
+                  <button data-key="back" type="button" aria-label="Backspace" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#F1FC7A;font:700 16px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">&#9003;</button>
+                  <button data-key="0" type="button" style="height:44px;border-radius:8px;border:1px solid rgba(241,252,122,.22);background:#3D1A47;color:#fff;font:700 18px/1 'Poppins',sans-serif;cursor:pointer" style-hover="background:#F1FC7A;color:#26072E">0</button>
+                  <button data-key="done" type="button" aria-label="Done" style="height:44px;border-radius:8px;border:0;background:#F1FC7A;color:#26072E;font:800 14px/1 'Poppins',sans-serif;cursor:pointer">OK</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="impactSlider" role="slider" tabindex="0" aria-label="Portions of scramble per week" aria-valuemin="1" aria-valuemax="50" aria-valuenow="3" style="position:relative;height:26px;margin-top:20px;cursor:pointer;touch-action:none;user-select:none;outline:none">
+            <div style="position:absolute;top:50%;left:0;right:0;height:8px;transform:translateY(-50%);border-radius:999px;background:rgba(241,252,122,.22)"></div>
+            <div id="impactFill" style="position:absolute;top:50%;left:0;width:6%;height:8px;transform:translateY(-50%);border-radius:999px;background:#F1FC7A;pointer-events:none"></div>
+            <div id="impactThumb" style="position:absolute;top:50%;left:6%;width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;background:#F1FC7A;border:3px solid #26072E;box-shadow:0 2px 10px rgba(0,0,0,.35);pointer-events:none"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font:500 11px/1 'Poppins',sans-serif;color:#9C8FA4;margin-top:6px"><span>1</span><span>50</span></div>
+          <div style="font:400 13px/1.5 'Poppins',sans-serif;color:#C9B9D0;margin-top:14px">Based on <b style="color:#fff">1 portion = 3 whole eggs</b>. For scramble the whole egg is used, so we count whole eggs, not just protein.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="background:#F1FC7A;border-radius:12px;padding:26px 24px">
+            <div id="impHens" style="font:900 clamp(34px,4vw,52px)/1 'Poppins',sans-serif;color:#26072E;letter-spacing:-.02em">52</div>
+            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#26072E;margin-top:8px">hens spared from a life in the barn, per year</div>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:26px 24px">
+            <div id="impAnimals" style="font:900 clamp(34px,4vw,52px)/1 'Poppins',sans-serif;color:#26072E;letter-spacing:-.02em">104</div>
+            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#6E5C77;margin-top:8px">animal lives spared, counting the culled male chicks</div>
+          </div>
+        </div>
+        <div style="background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+          <div>
+            <div id="impN" style="font:900 clamp(30px,3.4vw,44px)/1 'Poppins',sans-serif;color:#F1FC7A;letter-spacing:-.02em">≈ 16.4 kg</div>
+            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#D9CCDE;margin-top:8px">reactive nitrogen kept out of air and water, per year</div>
+          </div>
+          <span style="flex:0 0 auto;background:rgba(241,252,122,.14);color:#F1FC7A;font:800 10px/1.3 'Poppins',sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:8px 11px;border-radius:6px;text-align:center">Provisional<br>figure</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:2px">
+          <p style="font:400 12.5px/1.5 'Poppins',sans-serif;color:#9C8FA4;margin:0;max-width:340px">Nitrogen figure is a working estimate pending verification with the Louis Bolk Institute. Animal figures use ~300 eggs per hen per year.</p>
+          <a href="methodology.html" style="flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;background:transparent;color:#F1FC7A;font:800 13px/1 'Poppins',sans-serif;padding:12px 20px;border-radius:999px;border:1.5px solid rgba(241,252,122,.5);text-decoration:none;transition:background .18s,color .18s" style-hover="background:#F1FC7A;color:#26072E">How we calculate this
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-top:38px">
+      <span style="width:7px;height:7px;border-radius:50%;background:#F1FC7A;flex:0 0 auto"></span>
+      <span style="font:500 13.5px/1.4 'Poppins',sans-serif;color:#9C8FA4">Backed by the Louis Bolk Institute and Lekker Lupine.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE PRODUCT ===================== -->
+<section id="product" style="background:#FFFFFF;color:#26072E;padding:120px 0;scroll-margin-top:112px;font-family:'Poppins',sans-serif">
+  <div data-reveal="" style="max-width:1180px;margin:0 auto;padding:0 40px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
+      <div style="max-width:640px">
+        <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#26072E">The product</div>
+        <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#26072E;margin:16px 0 0">This is the scramble.</h2>
+        <p style="font:500 clamp(18px,1.7vw,21px)/1.5 'Poppins',sans-serif;color:#6E5C77;margin:18px 0 0">Enough talk about the idea. Here's the thing on your plate: soft, golden, and it scrambles, folds and bakes just like the egg you know.</p>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:9px;background:#F1FC7A;color:#26072E;font:800 11px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;border-radius:999px;white-space:nowrap">Made from lupin</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:22px;margin-top:44px">
+      <div style="width:100%;height:560px;display:block;box-shadow:0 18px 50px rgba(25,4,31,.16);border-radius:12px;overflow:hidden"><img src="assets/product-hero.jpg" alt="Lupin scramble, soft and golden, on a plate" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="display:grid;grid-template-rows:1fr 1fr;gap:22px">
+        <figure style="margin:0;position:relative;display:flex;flex-direction:column">
+          <div style="width:100%;flex:1;min-height:0;display:block;box-shadow:0 18px 50px rgba(25,4,31,.16);border-radius:12px;overflow:hidden"><img src="assets/product-croissant.jpg" alt="A golden lupin croissant" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        </figure>
+        <figure style="margin:0;position:relative;display:flex;flex-direction:column">
+          <div style="width:100%;flex:1;min-height:0;display:block;box-shadow:0 18px 50px rgba(25,4,31,.16);border-radius:12px;overflow:hidden"><img src="assets/product-rice.jpg" alt="Lupin scramble served over rice" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        </figure>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px">
+      <div style="border-top:2px solid #F1FC7A;padding-top:18px;transition:transform .22s cubic-bezier(.22,.61,.36,1),border-top-width .18s ease,padding-top .18s ease" style-hover="transform:translateY(-6px);border-top-width:5px;padding-top:15px">
+        <div style="font:800 18px/1.2 'Poppins',sans-serif;color:#26072E">Scrambles like egg</div>
+        <p style="font:400 14.5px/1.6 'Poppins',sans-serif;color:#6E5C77;margin:8px 0 0">Folds, sets and browns in the pan. No new technique to learn.</p>
+      </div>
+      <div style="border-top:2px solid #F1FC7A;padding-top:18px;transition:transform .22s cubic-bezier(.22,.61,.36,1),border-top-width .18s ease,padding-top .18s ease" style-hover="transform:translateY(-6px);border-top-width:5px;padding-top:15px">
+        <div style="font:800 18px/1.2 'Poppins',sans-serif;color:#26072E">High in protein</div>
+        <p style="font:400 14.5px/1.6 'Poppins',sans-serif;color:#6E5C77;margin:8px 0 0">Lupin is one of the most protein-rich beans there is.</p>
+      </div>
+      <div style="border-top:2px solid #F1FC7A;padding-top:18px;transition:transform .22s cubic-bezier(.22,.61,.36,1),border-top-width .18s ease,padding-top .18s ease" style-hover="transform:translateY(-6px);border-top-width:5px;padding-top:15px">
+        <div style="font:800 18px/1.2 'Poppins',sans-serif;color:#26072E">Just real ingredients</div>
+        <p style="font:400 14.5px/1.6 'Poppins',sans-serif;color:#6E5C77;margin:8px 0 0">A bean, grown at home, turned into breakfast.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SCALING ===================== -->
+<section id="scaling" style="background:#EFE9F2;color:#26072E;padding:120px 0;scroll-margin-top:112px;font-family:'Poppins',sans-serif">
+  <div data-reveal="" style="max-width:1180px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:stretch;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div>
+      <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#26072E">Scaling, done right</div>
+      <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#26072E;margin:16px 0 0">Local and organic first.</h2>
+      <p style="font:500 clamp(18px,1.7vw,21px)/1.5 'Poppins',sans-serif;color:#6E5C77;margin:18px 0 0">Close to home at the core. The global market only as a safety net.</p>
+      <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#6E5C77;margin:18px 0 0">We're building the supply chain in reverse. We start local and organic, and we aim to scale that with our demand, so we draw as little as possible from far away. As a major buyer, we give growers the certainty to switch to lupin at a fair price.</p>
+      <div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:18px">
+        <div style="flex:1;min-width:230px;background:#fff;border:1px solid #E5DCEA;border-radius:10px;padding:26px 26px;transition:transform .22s cubic-bezier(.22,.61,.36,1),box-shadow .22s,border-color .22s" style-hover="transform:translateY(-6px);box-shadow:0 20px 44px rgba(25,4,31,.14);border-color:#F1FC7A">
+          <div style="font:900 clamp(40px,5vw,58px)/0.9 'Poppins',sans-serif;letter-spacing:-.03em;color:#26072E">&lt;4<span style="font-size:.5em;vertical-align:top">%</span></div>
+          <div style="height:6px;width:40px;background:#F1FC7A;border-radius:3px;margin:14px 0 16px"></div>
+          <span style="font:500 14.5px/1.55 'Poppins',sans-serif;color:#6E5C77">of all lupin is eaten as human food today. The room to grow is enormous.</span>
+        </div>
+        <div style="flex:1;min-width:230px;background:#fff;border:1px solid #E5DCEA;border-radius:10px;padding:26px 26px;transition:transform .22s cubic-bezier(.22,.61,.36,1),box-shadow .22s,border-color .22s" style-hover="transform:translateY(-6px);box-shadow:0 20px 44px rgba(25,4,31,.14);border-color:#F1FC7A">
+          <div style="font:900 clamp(32px,3.6vw,44px)/0.95 'Poppins',sans-serif;letter-spacing:-.02em;color:#26072E">Grown in Europe</div>
+          <div style="height:6px;width:40px;background:#F1FC7A;border-radius:3px;margin:14px 0 16px"></div>
+          <span style="font:500 14.5px/1.55 'Poppins',sans-serif;color:#6E5C77">Ample supply, with cultivation in Poland, Germany, France and beyond. A safety net, close to home.</span>
+        </div>
+      </div>
+    </div>
+    <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;height:100%;min-height:420px;box-shadow:0 18px 50px rgba(25,4,31,.18)">
+      <img src="assets/lupin-harvest.jpg" alt="A combine harvesting a ripe lupin field" style="width:100%;height:100%;object-fit:cover;display:block">
+    </figure>
+  </div>
+</section>
+
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" style="background:#26072E;color:#fff;padding:120px 0;scroll-margin-top:112px;font-family:'Poppins',sans-serif">
+<div data-reveal="" style="max-width:1180px;margin:0 auto 84px;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <figure style="margin:0;position:relative;border-radius:12px;overflow:hidden;height:480px;box-shadow:0 24px 60px rgba(0,0,0,.34)">
+      <img src="assets/founders-about.jpg" alt="Ton Gerritsen and Dean McClumpha standing in a flowering lupin field" style="width:100%;height:100%;object-fit:cover;object-position:58% 40%;display:block">
+    </figure>
+    <div>
+      <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">The story</div>
+      <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:16px 0 0">The people behind the <span style="color:#F1FC7A">scramble.</span></h2>
+      <p style="font:500 clamp(18px,1.7vw,21px)/1.5 'Poppins',sans-serif;color:#D9CCDE;margin:18px 0 0;max-width:520px">Two founders, one conviction: the food we eat shouldn't deplete our only planet.</p>
+      <div style="margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:22px">
+        <div style="background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:10px;padding:26px 24px">
+          <div style="font:800 22px/1.15 'Poppins',sans-serif;color:#fff">Ton Gerritsen</div>
+          <div style="font:800 11px/1.3 'Poppins',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#F1FC7A;margin-top:10px">Co-founder · Business development</div>
+          <a href="mailto:ton@nomadplant.co" style="display:inline-block;margin-top:14px;font:500 14px/1 'Poppins',sans-serif;color:#D9CCDE;text-decoration:none;border-bottom:1px solid rgba(241,252,122,.4);padding-bottom:2px;transition:color .15s,border-color .15s" style-hover="color:#F1FC7A;border-color:#F1FC7A">ton@nomadplant.co</a>
+          <a href="tel:+31613327585" style="display:block;margin-top:10px;font:500 14px/1 'Poppins',sans-serif;color:#9C8FA4;text-decoration:none;transition:color .15s" style-hover="color:#F1FC7A">+31 (0)6 133 27 585</a>
+          <a href="https://www.linkedin.com/in/gerritsenton/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;font:600 13px/1 'Poppins',sans-serif;color:#4DA6F0;text-decoration:none;transition:color .15s" style-hover="color:#7DC0F5"><svg width="17" height="17" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>LinkedIn</a>
+        </div>
+        <div style="background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:10px;padding:26px 24px">
+          <div style="font:800 22px/1.15 'Poppins',sans-serif;color:#fff">Dean McClumpha</div>
+          <div style="font:800 11px/1.3 'Poppins',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#F1FC7A;margin-top:10px">Co-founder · Product development</div>
+          <a href="mailto:dean@nomadplant.co" style="display:inline-block;margin-top:14px;font:500 14px/1 'Poppins',sans-serif;color:#D9CCDE;text-decoration:none;border-bottom:1px solid rgba(241,252,122,.4);padding-bottom:2px;transition:color .15s,border-color .15s" style-hover="color:#F1FC7A;border-color:#F1FC7A">dean@nomadplant.co</a>
+          <a href="tel:+447551914189" style="display:block;margin-top:10px;font:500 14px/1 'Poppins',sans-serif;color:#9C8FA4;text-decoration:none;transition:color .15s" style-hover="color:#F1FC7A">+44 (0)7551 914 189</a>
+          <a href="https://www.linkedin.com/in/dean-mcclumpha/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;font:600 13px/1 'Poppins',sans-serif;color:#4DA6F0;text-decoration:none;transition:color .15s" style-hover="color:#7DC0F5"><svg width="17" height="17" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-reveal="" style="max-width:1180px;margin:0 auto 84px;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div>
+      <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">The circle</div>
+      <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:16px 0 0">From taking to giving back.</h2>
+      <p style="font:500 clamp(18px,1.7vw,21px)/1.5 'Poppins',sans-serif;color:#D9CCDE;margin:18px 0 0;max-width:520px">The soil feeds the plant. The plant restores the soil. The bean feeds us. A loop that never stops giving back.</p>
+      <div style="margin-top:30px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:34px;height:34px;flex:0 0 auto;border-radius:50%;background:#F1FC7A;color:#26072E;display:flex;align-items:center;justify-content:center;font:800 15px/1 'Poppins',sans-serif">1</div>
+          <div><div style="font:700 17px/1.25 'Poppins',sans-serif;color:#fff">The soil feeds the plant</div><p style="font:400 14.5px/1.55 'Poppins',sans-serif;color:#C9B9D0;margin:5px 0 0">Lupin takes nitrogen from the air and unlocks phosphate already in the ground.</p></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:34px;height:34px;flex:0 0 auto;border-radius:50%;background:#F1FC7A;color:#26072E;display:flex;align-items:center;justify-content:center;font:800 15px/1 'Poppins',sans-serif">2</div>
+          <div><div style="font:700 17px/1.25 'Poppins',sans-serif;color:#fff">The plant restores the soil</div><p style="font:400 14.5px/1.55 'Poppins',sans-serif;color:#C9B9D0;margin:5px 0 0">It builds organic matter, so even the crops that follow grow better.</p></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:34px;height:34px;flex:0 0 auto;border-radius:50%;background:#F1FC7A;color:#26072E;display:flex;align-items:center;justify-content:center;font:800 15px/1 'Poppins',sans-serif">3</div>
+          <div><div style="font:700 17px/1.25 'Poppins',sans-serif;color:#fff">The bean feeds us</div><p style="font:400 14.5px/1.55 'Poppins',sans-serif;color:#C9B9D0;margin:5px 0 0">We harvest the bean and turn it into a scramble you actually want to eat.</p></div>
+        </div>
+      </div>
+      <p style="font:500 16px/1.6 'Poppins',sans-serif;color:#D9CCDE;margin:28px 0 0;max-width:480px">Where a barn takes, a lupin field <b style="color:#26072E;background:#F1FC7A;padding:1px 7px;border-radius:4px">returns</b>. We get our scramble. The earth gets its fertility back.</p>
+    </div>
+
+    <!-- Living regeneration ring -->
+    <div style="position:relative;background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:14px;padding:30px;aspect-ratio:1/1;max-width:480px;width:100%;justify-self:center;box-shadow:0 24px 60px rgba(25,4,31,.22)">
+      <svg viewBox="0 0 440 440" width="100%" height="100%" aria-label="The regenerative food cycle: soil feeds the plant, the plant feeds us, the soil is restored">
+        <!-- base track -->
+        <circle cx="220" cy="220" r="160" fill="none" stroke="rgba(241,252,122,.16)" stroke-width="2"></circle>
+        <!-- gentle flowing dashes -->
+        <circle cx="220" cy="220" r="160" fill="none" stroke="rgba(241,252,122,.38)" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 24" style="animation:nm-flow 34s linear infinite"></circle>
+
+        <!-- a seed carried gently around the loop -->
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0 220 220" to="360 220 220" dur="17s" repeatCount="indefinite"></animateTransform>
+          <g transform="translate(220 60)">
+            <ellipse cx="0" cy="0" rx="6" ry="8.5" fill="#FBFFD6" stroke="#26072E" stroke-width="1.5"></ellipse>
+            <path d="M5 -5 C 12 -9 15 -5 13 1 C 7 1 4 -2 5 -5 Z" fill="#F1FC7A" stroke="#26072E" stroke-width="1"></path>
+          </g>
+        </g>
+
+        <!-- centre: growing sprout + label -->
+        <g>
+          <g transform="translate(220 202)" style="transform-box:fill-box;transform-origin:center bottom">
+            <animateTransform attributeName="transform" type="scale" additive="sum" values="1 0.94;1 1.06;1 0.94" dur="4.8s" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" repeatCount="indefinite"></animateTransform>
+            <svg x="-24" y="-24" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F1FC7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 20h10"></path>
+              <path d="M10 20c5.5-2.5.8-6.4 3-10"></path>
+              <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"></path>
+              <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"></path>
+            </svg>
+          </g>
+          <text x="220" y="250" text-anchor="middle" font-family="Poppins,sans-serif" font-size="15" font-weight="800" letter-spacing="1.5" fill="#F1FC7A">FEED THE</text>
+          <text x="220" y="268" text-anchor="middle" font-family="Poppins,sans-serif" font-size="15" font-weight="800" letter-spacing="1.5" fill="#F1FC7A">EARTH</text>
+        </g>
+
+        <!-- station 1 (top): the soil -->
+        <g>
+          <path d="M34 -11 C 42 3 35 19 23 27 C 11 35 -6 37 -19 30 C -33 22 -39 6 -34 -9 C -30 -23 -22 -34 -8 -36 C 7 -38 26 -25 34 -11 Z" fill="#F1FC7A" transform="translate(220 60) rotate(6)"></path>
+          <svg x="205" y="45" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#26072E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.165 6.598C9.954 7.478 9.64 8.36 9 9c-.64.64-1.521.954-2.402 1.165A6 6 0 0 0 8 22a13.96 13.96 0 0 0 9.9-4.1 13.96 13.96 0 0 0 4.1-9.9 6 6 0 0 0-11.835-1.402Z"></path>
+            <path d="M5.341 10.62a4 4 0 1 0 5.279-5.28"></path>
+          </svg>
+          <text x="220" y="20" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="800" letter-spacing="1.5" fill="#F1FC7A">SEED</text>
+        </g>
+        <!-- station 2 (lower-right): the plant -->
+        <g>
+          <path d="M30 -19 C 41 -9 40 9 32 22 C 25 34 7 38 -7 35 C -22 32 -36 23 -37 8 C -38 -8 -27 -20 -15 -28 C -2 -36 19 -29 30 -19 Z" fill="#F1FC7A" transform="translate(358 300) rotate(60)"></path>
+          <svg x="343" y="285" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#26072E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+          </svg>
+          <text x="358" y="358" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="800" letter-spacing="1.5" fill="#F1FC7A">PLANT</text>
+        </g>
+        <!-- station 3 (lower-left): the table -->
+        <g>
+          <path d="M33 -5 C 39 10 35 27 21 33 C 6 40 -12 35 -24 26 C -35 17 -38 1 -31 -13 C -24 -27 -11 -36 3 -35 C 17 -34 27 -20 33 -5 Z" fill="#F1FC7A" transform="translate(82 300) rotate(205)"></path>
+          <svg x="67" y="285" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#26072E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"></path>
+            <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"></path>
+            <path d="m2.1 21.8 6.4-6.3"></path>
+            <path d="m19 5-7 7"></path>
+          </svg>
+          <text x="82" y="358" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="800" letter-spacing="1.5" fill="#F1FC7A">TABLE</text>
+        </g>
+      </svg>
+      <div style="position:absolute;left:0;right:0;bottom:18px;text-align:center;font:600 11px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9C8FA4">The loop never stops</div>
+    </div>
+  </div>
+  <div data-reveal="" style="max-width:1180px;margin:0 auto 84px;padding:0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div>
+      <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">The price</div>
+      <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:16px 0 0">Better for the planet. And, soon, for your wallet.</h2>
+      <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#D9CCDE;margin:20px 0 0;max-width:520px">Good for animals, soil, and climate, and it can pay for itself. As we scale, the cost per unit drops, so we can pay growers fairly and stay affordable for you. That's what we're driving toward.</p>
+      <div style="margin-top:28px;background:#3D1A47;border:1px solid rgba(241,252,122,.28);border-radius:10px;padding:26px 28px">
+        <div style="font:800 11px/1 'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#F1FC7A">Our ambition</div>
+        <div style="font:800 clamp(20px,2.2vw,26px)/1.25 'Poppins',sans-serif;color:#fff;margin-top:12px">Lupin scramble, priced below a conventional egg.</div>
+      </div>
+    </div>
+    <div role="img" aria-label="Lupin scramble served in a blue bowl, topped with fresh herbs" style="width:100%;height:480px;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,.34);background-image:url('assets/price-scramble-bowl.jpg');background-size:165%;background-position:50% 68%;background-repeat:no-repeat"></div>
+  </div>
+
+  <div data-reveal="" style="max-width:1180px;margin:0 auto 84px;padding:0 40px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div style="background:#3D1A47;border:2px dashed rgba(241,252,122,.5);border-radius:14px;padding:clamp(32px,4vw,52px);display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,3vw,40px);align-items:center">
+      <div style="width:72px;height:72px;flex:0 0 auto;border-radius:16px;background:#F1FC7A;display:flex;align-items:center;justify-content:center">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#26072E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+      </div>
+      <div>
+        <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">The foundation</div>
+        <h2 style="font:800 clamp(26px,3vw,38px)/1.08 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:10px 0 0">The No Egg Foundation.</h2>
+        <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#D9CCDE;margin:14px 0 0;max-width:680px">We're setting up the foundation alongside No Egg Plant itself. A share of our profit flows into it to support the wider transition, because we want to do this right from the very start.</p>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal="" style="max-width:1180px;margin:72px auto 0;padding:52px 40px 0;border-top:1px solid rgba(241,252,122,.16);opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div style="display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:start">
+      <div>
+        <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">Contact</div>
+        <h3 style="font:800 clamp(26px,2.6vw,34px)/1.1 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:14px 0 0">Got questions or wild ideas?</h3>
+        <p style="font:500 16px/1.55 'Poppins',sans-serif;color:#D9CCDE;margin:14px 0 0;max-width:380px">Drop us a line about partnerships, growing lupin, or tasting the scramble. We read every message.</p>
+      </div>
+      <form id="contactForm" novalidate="novalidate" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <input name="name" type="text" placeholder="Your name" required="required" style="width:100%;padding:14px 16px;background:#3D1A47;border:1px solid rgba(241,252,122,.22);border-radius:10px;color:#fff;font:500 15px/1.3 'Poppins',sans-serif;outline:none;transition:border-color .15s" style-focus="border-color:#F1FC7A">
+          <input name="email" type="email" placeholder="Email address" required="required" style="width:100%;padding:14px 16px;background:#3D1A47;border:1px solid rgba(241,252,122,.22);border-radius:10px;color:#fff;font:500 15px/1.3 'Poppins',sans-serif;outline:none;transition:border-color .15s" style-focus="border-color:#F1FC7A">
+        </div>
+        <textarea name="message" rows="4" placeholder="Your message" required="required" style="width:100%;padding:14px 16px;background:#3D1A47;border:1px solid rgba(241,252,122,.22);border-radius:10px;color:#fff;font:500 15px/1.5 'Poppins',sans-serif;outline:none;resize:vertical;transition:border-color .15s" style-focus="border-color:#F1FC7A"></textarea>
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px">
+          <button type="submit" style="background:#F1FC7A;color:#26072E;font:800 14px/1 'Poppins',sans-serif;letter-spacing:.01em;padding:15px 28px;border-radius:999px;border:0;cursor:pointer;transition:transform .14s ease,background .18s ease" style-hover="background:#DCE85C;transform:translateY(-1px)">Send message</button>
+          <span id="contactStatus" style="display:none;font:600 14px/1.4 'Poppins',sans-serif;color:#F1FC7A">Thanks — we'll be in touch soon.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CALL TO ACTION ===================== -->
+<section id="partner" style="position:relative;background:#19041F;color:#fff;padding:130px 0;scroll-margin-top:112px;overflow:hidden;font-family:'Poppins',sans-serif">
+  <img src="assets/photo-lupin-scramble.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22;display:block">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,4,31,.86),rgba(25,4,31,.92))"></div>
+  <div data-reveal="" style="position:relative;max-width:900px;margin:0 auto;padding:0 40px;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">Now the world</div>
+    <h2 style="font:900 clamp(36px,5vw,62px)/1.0 'Poppins',sans-serif;letter-spacing:-.02em;text-transform:uppercase;color:#fff;margin:18px 0 0">The product exists.<br><span style="color:#F1FC7A">Now the world.</span></h2>
+    <p style="font:500 clamp(18px,1.7vw,20px)/1.55 'Poppins',sans-serif;color:#EDE3F0;margin:22px auto 0;max-width:620px">For everyone, not just for us. We've built it, and it works. Now we're bringing it to market, so people, animals, and the earth all come out ahead.</p>
+    <div style="display:flex;gap:14px;margin-top:34px;justify-content:center;flex-wrap:wrap">
+      <a href="#partner" style="background:#F1FC7A;color:#26072E;font:800 15px/1 'Poppins',sans-serif;letter-spacing:.01em;padding:16px 30px;border-radius:999px;text-decoration:none;transition:transform .14s ease,background .18s ease" style-hover="background:#DCE85C;transform:translateY(-1px)">Taste the future</a>
+      <a href="#partner" style="background:transparent;color:#fff;font:800 15px/1 'Poppins',sans-serif;letter-spacing:.01em;padding:16px 30px;border-radius:999px;border:1.5px solid rgba(255,255,255,.55);text-decoration:none;transition:transform .14s ease,border-color .18s,background .18s" style-hover="border-color:#fff;background:rgba(255,255,255,.1)">Become a partner</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE EVIDENCE ===================== -->
+<section id="evidence" style="background:#F7F3F9;color:#26072E;padding:110px 0 90px;scroll-margin-top:112px;font-family:'Poppins',sans-serif">
+  <div data-reveal="" style="max-width:1180px;margin:0 auto;padding:0 40px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div style="max-width:700px">
+      <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#26072E">The evidence</div>
+      <h2 style="font:800 clamp(28px,3.2vw,40px)/1.08 'Poppins',sans-serif;letter-spacing:-.015em;color:#26072E;margin:16px 0 0">Backed by people who know the field.</h2>
+      <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#6E5C77;margin:18px 0 0">Our claims about soil, biodiversity, and cultivation rest on the work of the Louis Bolk Institute and our partner Lekker Lupine, together more than fifteen years of scientific research and thirty years of growing experience. Lekker Lupine farms organically and is Skal/EU-organic certified.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:18px;margin-top:36px">
+      <div style="flex:1;min-width:220px;background:#fff;border:1px solid #E5DCEA;border-radius:10px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:16px;transition:box-shadow .22s,border-color .22s,transform .22s cubic-bezier(.22,.61,.36,1)" style-hover="box-shadow:0 18px 44px rgba(25,4,31,.12);border-color:#F1FC7A;transform:translateY(-3px)">
+        <div style="width:100%;height:82px;display:block;padding:4px;box-sizing:border-box;background:#fff"><img src="assets/logo-lekkerlupine.webp" alt="Lekker Lupine" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <a href="https://www.lekkerlupine.nl" target="_blank" rel="noopener" style="font:700 15px/1.2 'Poppins',sans-serif;color:#26072E;text-decoration:none;text-underline-offset:4px;transition:color .15s" style-hover="text-decoration:underline">Lekker Lupine</a>
+      </div>
+      <div style="flex:1;min-width:220px;background:#fff;border:1px solid #E5DCEA;border-radius:10px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:16px;transition:box-shadow .22s,border-color .22s,transform .22s cubic-bezier(.22,.61,.36,1)" style-hover="box-shadow:0 18px 44px rgba(25,4,31,.12);border-color:#F1FC7A;transform:translateY(-3px)">
+        <div style="width:100%;height:70px;display:block;padding:6px 10px;box-sizing:border-box;background:#fff"><img src="assets/logo-louisbolk.png" alt="Louis Bolk Institute" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <a href="https://www.louisbolk.nl" target="_blank" rel="noopener" style="font:700 15px/1.2 'Poppins',sans-serif;color:#26072E;text-decoration:none;text-underline-offset:4px;transition:color .15s" style-hover="text-decoration:underline">Louis Bolk Institute</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#19041F;color:#fff;padding:64px 0 40px;font-family:'Poppins',sans-serif">
+  <div style="max-width:1180px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap">
+    <div style="max-width:320px">
+      <div style="font:900 22px/1 'Poppins',sans-serif;letter-spacing:.005em;color:#fff"><span style="color:#F1FC7A">NOEGG</span>PLANT</div>
+      <p style="font:500 14px/1.55 'Poppins',sans-serif;color:#9C8FA4;margin:14px 0 0">Plant-based scramble from lupin. The taste you know, without the animal that suffers for it.</p>
+    </div>
+    <div style="display:flex;gap:30px;flex-wrap:wrap">
+      <a href="#problem" style="color:rgba(255,255,255,.82);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:5px;transition:color .15s" data-fhover="1">The Problem</a>
+      <a href="#solution" style="color:rgba(255,255,255,.82);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:5px;transition:color .15s" data-fhover="1">The Solution</a>
+      <a href="#product" style="color:rgba(255,255,255,.82);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:5px;transition:color .15s" data-fhover="1">The Product</a>
+      <a href="#about" style="color:rgba(255,255,255,.82);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:5px;transition:color .15s" data-fhover="1">The Story</a>
+      <a href="#partner" style="color:rgba(255,255,255,.82);font:500 14px/1 'Poppins',sans-serif;text-decoration:none;text-underline-offset:5px;transition:color .15s" data-fhover="1">Partner</a>
+    </div>
+  </div>
+  <div style="max-width:1180px;margin:40px auto 0;padding:24px 40px 0;border-top:1px solid rgba(241,252,122,.16);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <span style="font:500 12.5px/1.4 'Poppins',sans-serif;color:#6E5C77">© 2026 NoEggPlant Co. Built to give back.</span>
+    <span style="font:500 12.5px/1.4 'Poppins',sans-serif;color:#6E5C77">Sources: Louis Bolk Institute, Lekker Lupine, CBS, WUR.</span>
+  </div>
+</footer>
+<script src="main.js" defer></script>
+</body>
+</html>
