@@ -95,17 +95,27 @@
       els.forEach(function (el) { el.style.opacity = "1"; el.style.transform = "none"; });
     }
 
-    // Contact form: shows a thank-you message. NOTE: this does not
-    // actually send an email yet — it's a front-end confirmation only.
+    // Contact form: sends the submission to a Google Apps Script, which
+    // emails ton@nomadplant.co and logs it to a Google Sheet, then shows
+    // the thank-you message. (no-cors: the browser can't read Google's
+    // reply, which is fine — we confirm to the visitor optimistically.)
     var form = document.getElementById("contactForm");
     if (form) {
+      var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxxWmajDWehtBQtMMJXwgKzcguZtpBbi4MXU3-ZK-E6ljL5BrPeStFR8d-7F0Y8iA4gqA/exec";
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        if (!form.reportValidity || form.reportValidity()) {
-          var status = document.getElementById("contactStatus");
-          if (status) status.style.display = "inline";
-          form.querySelectorAll("input,textarea").forEach(function (el) { el.value = ""; el.blur(); });
-        }
+        // Let the browser show its "please fill this in" prompts if invalid.
+        if (form.reportValidity && !form.reportValidity()) return;
+
+        var data = new URLSearchParams();
+        form.querySelectorAll("input,textarea").forEach(function (el) {
+          if (el.name) data.append(el.name, el.value);
+        });
+        fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: data }).catch(function () {});
+
+        var status = document.getElementById("contactStatus");
+        if (status) status.style.display = "inline";
+        form.querySelectorAll("input,textarea").forEach(function (el) { el.value = ""; el.blur(); });
       });
     }
 
