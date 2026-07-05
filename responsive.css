@@ -1,0 +1,70 @@
+/* ============================================================
+   Mobile / responsive layout for NoEggPlant
+   ------------------------------------------------------------
+   The original design was desktop-only: fixed multi-column grids
+   and no breakpoints. These rules collapse the layout to a single
+   column on phones and small tablets and tidy up spacing.
+
+   Because the pages use inline styles (which normally beat a
+   stylesheet), these overrides use !important so they win. Nothing
+   here affects the desktop layout — it all lives inside the
+   max-width media query.
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* 1) Collapse every multi-column grid to a single column.
+        The attribute selectors match the inline styles directly, so
+        no HTML changes are needed for the grids themselves.
+        (Two exceptions handled below: the number keypad and the
+         4-column methodology table.) */
+  [style*="1fr 1fr"],
+  [style*="1.05fr"],
+  [style*="1.55fr"],
+  [style*="1.08fr"],
+  [style*="auto 1fr"],
+  [style*="repeat(3"] {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  /* Exception: keep the impact calculator's number keypad as a 3x grid. */
+  #impKeypad [style*="repeat(3"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  /* 2) Tighten the big side padding and vertical section spacing. */
+  [style*="padding:0 40px"] {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+  #problem, #solution, #product, #scaling, #about, #partner, #evidence {
+    padding-top: 76px !important;
+    padding-bottom: 76px !important;
+  }
+
+  /* 3) Hero nav: shrink the logo and hide the inline menu links on
+        phones (the page is one long scroll and the footer repeats
+        every link). */
+  #nmnav { height: 74px !important; padding: 0 20px !important; }
+  #nmnav img { height: 58px !important; }
+  #nmnav > div { display: none !important; }
+
+  /* 4) Hero bottom labels: stop "Takes" / "Gives back" and their
+        paragraphs overlapping. Narrow each to its own half, shrink
+        the big word, and drop the long paragraph on phones. */
+  #top .hlabel-l { left: 20px !important; right: auto !important; max-width: 44vw !important; }
+  #top .hlabel-r { right: 20px !important; left: auto !important; max-width: 44vw !important; }
+  #top .hbig { font-size: 24px !important; }
+  #top .hdesc { display: none !important; }
+
+  /* 5) Solution carousel: make each card fit the phone screen so a
+        whole card is visible at a time (it still swipes sideways). */
+  #solTrack > div { flex-basis: 86% !important; }
+
+  /* 6) Methodology: let the 4-column coefficient table scroll
+        sideways instead of squashing its columns. */
+  .mtable { overflow-x: auto !important; }
+  .mtable > div { min-width: 560px; }
+}
