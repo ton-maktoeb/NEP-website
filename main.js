@@ -229,6 +229,15 @@
       var plusBtn = document.getElementById("impPlus");
       if (minusBtn) minusBtn.addEventListener("click", function () { stepBy(-1); });
       if (plusBtn) plusBtn.addEventListener("click", function () { stepBy(1); });
+
+      // "See it at scale" quick-pick buttons: jump the value to a preset.
+      document.querySelectorAll(".imp-preset").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          typing = false;
+          value = Math.max(MIN, Math.min(TYPE_MAX, parseInt(btn.getAttribute("data-portions"), 10) || MIN));
+          updateImpact();
+        });
+      });
       var dragging = false;
       slider.addEventListener("pointerdown", function (e) { dragging = true; if (slider.setPointerCapture) slider.setPointerCapture(e.pointerId); setFromX(e.clientX); });
       slider.addEventListener("pointermove", function (e) { if (!dragging) return; e.preventDefault(); setFromX(e.clientX); });
