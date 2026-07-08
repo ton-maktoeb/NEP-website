@@ -86,3 +86,12 @@
 @media (min-width: 769px) {
   #navToggle, #mobileMenu { display: none !important; }
 }
+
+/* Solution cards: on wide screens there's room for all three, so show
+   them side-by-side instead of a cut-off carousel, and hide the now-
+   pointless arrows/dots. Below this width they stay a swipe carousel. */
+@media (min-width: 1024px) {
+  #solTrack { overflow: visible !important; }
+  #solTrack > div { flex: 1 1 0 !important; min-width: 0 !important; }
+  #solTrack + div { display: none !important; }
+}
