@@ -1,4 +1,4 @@
-import { next } from '@vercel/edge';
+import { next, ipAddress, geolocation } from '@vercel/edge';
 
 /*
   Password gate for the pre-launch NoEggPlant site.
@@ -12,9 +12,14 @@ import { next } from '@vercel/edge';
     SITE_MASTER_PASSWORD  your permanent password
     SITE_GUEST_CODES      comma-separated codes you hand out
     SITE_COOKIE_SECRET    random string used to sign the login cookie
+    SITE_LOG_URL          (optional) Google Apps Script URL to log logins to
 
   Revoking access: delete a code from SITE_GUEST_CODES and redeploy.
   The master password is never revoked.
+
+  Access log: if SITE_LOG_URL is set, each successful login is recorded
+  to that Google Sheet (time, code, IP, city/region/country, device).
+  Remove the variable to turn logging off.
 */
 
 export const config = {
@@ -96,6 +101,25 @@ function htmlResponse(body, status) {
   });
 }
 
+// Record a successful login to a Google Sheet, if a log URL is configured.
+// Failures here are swallowed so logging can never block someone logging in.
+async function logLogin(request, identity) {
+  const url = process.env.SITE_LOG_URL;
+  if (!url) return; // logging stays off until SITE_LOG_URL is set
+  try {
+    const geo = geolocation(request) || {};
+    const body = new URLSearchParams({
+      code: identity,
+      ip: ipAddress(request) || '',
+      city: geo.city || '',
+      region: geo.region || '',
+      country: geo.country || '',
+      ua: request.headers.get('user-agent') || ''
+    });
+    await fetch(url, { method: 'POST', body: body });
+  } catch (e) { /* ignore logging errors */ }
+}
+
 export default async function middleware(request) {
   const path = new URL(request.url).pathname;
 
@@ -122,6 +146,7 @@ export default async function middleware(request) {
     else if (password && guestList().includes(password)) identity = password;
 
     if (identity) {
+      await logLogin(request, identity);
       const cookie = await makeCookie(identity, secret);
       return new Response(null, { status: 303, headers: { Location: '/', 'Set-Cookie': cookie } });
     }
