@@ -85,6 +85,11 @@
    (guards against it lingering if the window is resized larger). */
 @media (min-width: 769px) {
   #navToggle, #mobileMenu { display: none !important; }
+
+  /* The Price: put the image on the left and the text on the right
+     (on phones it stays stacked text-first for a better reading order). */
+  .price-row { grid-template-columns: .95fr 1.05fr !important; }
+  .price-img { order: -1 !important; }
 }
 
 /* Solution cards: on wide screens there's room for all three, so show
