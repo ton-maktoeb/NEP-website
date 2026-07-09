@@ -289,7 +289,7 @@
 
     // Scroll-spy: underline the nav item whose section is in view.
     var spyLinks = [].slice.call(document.querySelectorAll("[data-spy]"));
-    var spyIds = ["problem", "solution", "product", "about"];
+    var spyIds = ["problem", "solution", "product", "about", "contact"];
     var activeId = null;
     var paint = function (a) {
       var on = a.getAttribute("data-spy") === activeId;
