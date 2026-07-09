@@ -193,6 +193,10 @@
             nEl.textContent = "≈ " + Math.round(nG) + " g";
           }
         }
+        // Keep the matching scale preset highlighted (yellow) as the active choice.
+        document.querySelectorAll(".imp-preset").forEach(function (b) {
+          b.classList.toggle("is-active", parseInt(b.getAttribute("data-portions"), 10) === value);
+        });
       };
       var setFromX = function (clientX) {
         typing = false;

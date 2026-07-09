@@ -11,6 +11,14 @@
    max-width media query.
    ============================================================ */
 
+/* Impact calculator: keep the selected scale preset filled yellow.
+   Uses !important so it survives the inline-style hover helper. */
+.imp-preset.is-active {
+  background: #F1FC7A !important;
+  color: #26072E !important;
+  border-color: #F1FC7A !important;
+}
+
 @media (max-width: 768px) {
 
   /* 1) Collapse every multi-column grid to a single column.
