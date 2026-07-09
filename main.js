@@ -52,6 +52,63 @@
   function init() {
     wireStateStyles();
 
+    // Custom "bean" cursor: on load it sits on the dot after "Scramble",
+    // then slow-drags after the mouse. Only on real-mouse (fine pointer)
+    // devices and only on the page that has the Scramble dot.
+    (function beanCursor() {
+      if (!window.matchMedia || !window.matchMedia("(pointer: fine)").matches) return;
+      var dotEl = document.getElementById("scrambleDot");
+      if (!dotEl) return;
+
+      var HALF = 20; // cursor image is 40x40 with its hotspot in the centre
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var EASE = reduce ? 1 : 0.13; // lower = slower drag behind the mouse
+      var moved = false;
+      var target = { x: 0, y: 0 }, pos = { x: 0, y: 0 };
+
+      var bean = document.createElement("img");
+      bean.src = "assets/cursor-bean.png";
+      bean.alt = "";
+      bean.setAttribute("aria-hidden", "true");
+      bean.style.cssText = "position:fixed;left:0;top:0;width:40px;height:40px;z-index:2147483000;pointer-events:none;will-change:transform;transition:opacity .2s ease";
+      document.body.appendChild(bean);
+
+      // Hide the native cursor so only the bean shows (kept behind this class
+      // so the native cursor stays if the script never runs).
+      var hide = document.createElement("style");
+      hide.textContent = "html.bean-cursor, html.bean-cursor *{cursor:none !important}";
+      document.head.appendChild(hide);
+      document.documentElement.classList.add("bean-cursor");
+
+      // Centre of the dot after "Scramble".
+      var dotCenter = function () {
+        var r = dotEl.getBoundingClientRect();
+        return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+      };
+      var start = dotCenter();
+      target.x = pos.x = start.x;
+      target.y = pos.y = start.y;
+
+      window.addEventListener("mousemove", function (e) { target.x = e.clientX; target.y = e.clientY; moved = true; }, { passive: true });
+      document.addEventListener("mouseleave", function () { bean.style.opacity = "0"; });
+      document.addEventListener("mouseenter", function () { bean.style.opacity = "1"; });
+
+      (function loop() {
+        if (!moved) {
+          // Before the first real mouse move, stay glued to the dot
+          // (re-read each frame so it survives the web font loading in).
+          var d = dotCenter();
+          pos.x = target.x = d.x;
+          pos.y = target.y = d.y;
+        } else {
+          pos.x += (target.x - pos.x) * EASE;
+          pos.y += (target.y - pos.y) * EASE;
+        }
+        bean.style.transform = "translate(" + (pos.x - HALF) + "px," + (pos.y - HALF) + "px)";
+        requestAnimationFrame(loop);
+      })();
+    })();
+
     // Keep background videos playing and looping (some browsers pause them).
     var kick = function () {
       document.querySelectorAll("video").forEach(function (v) {
