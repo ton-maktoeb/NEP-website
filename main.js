@@ -62,7 +62,7 @@
 
       var HALF = 20; // cursor image is 40x40 with its hotspot in the centre
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var EASE = reduce ? 1 : 0.13; // lower = slower drag behind the mouse
+      var EASE = reduce ? 1 : 0.35; // lower = slower/draggier, higher = snappier
       var moved = false;
       var target = { x: 0, y: 0 }, pos = { x: 0, y: 0 };
 
@@ -80,10 +80,11 @@
       document.head.appendChild(hide);
       document.documentElement.classList.add("bean-cursor");
 
-      // Centre of the dot after "Scramble".
+      // Position of the dot (period) after "Scramble". A period sits low in
+      // its line box, so bias downward to land on the visible glyph.
       var dotCenter = function () {
         var r = dotEl.getBoundingClientRect();
-        return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        return { x: r.left + r.width / 2, y: r.top + r.height * 0.75 };
       };
       var start = dotCenter();
       target.x = pos.x = start.x;
