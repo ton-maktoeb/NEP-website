@@ -12,3 +12,6 @@ NEP-passwords-PRIVATE.txt
 .DS_Store
 Thumbs.db
 *.log
+
+# Large source headshots (cropped versions are committed instead)
+assets/*_headshot.jpg
