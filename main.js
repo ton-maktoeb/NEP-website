@@ -122,13 +122,13 @@
       els.forEach(function (el) { el.style.opacity = "1"; el.style.transform = "none"; });
     }
 
-    // Contact form: sends the submission to a Google Apps Script, which
+    // Contact forms: send the submission to a Google Apps Script, which
     // emails ton@nomadplant.co and logs it to a Google Sheet, then shows
     // the thank-you message. (no-cors: the browser can't read Google's
     // reply, which is fine — we confirm to the visitor optimistically.)
-    var form = document.getElementById("contactForm");
-    if (form) {
-      var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxxWmajDWehtBQtMMJXwgKzcguZtpBbi4MXU3-ZK-E6ljL5BrPeStFR8d-7F0Y8iA4gqA/exec";
+    // Wires every .contact-form (one mid-page, one in the bottom Contact section).
+    var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxxWmajDWehtBQtMMJXwgKzcguZtpBbi4MXU3-ZK-E6ljL5BrPeStFR8d-7F0Y8iA4gqA/exec";
+    document.querySelectorAll(".contact-form").forEach(function (form) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         // Let the browser show its "please fill this in" prompts if invalid.
@@ -140,11 +140,11 @@
         });
         fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: data }).catch(function () {});
 
-        var status = document.getElementById("contactStatus");
+        var status = form.querySelector(".contact-status");
         if (status) status.style.display = "inline";
         form.querySelectorAll("input,textarea").forEach(function (el) { el.value = ""; el.blur(); });
       });
-    }
+    });
 
     // Impact calculator: portions/week -> hens, animal lives, nitrogen saved per year.
     // NOTE: coefficients are provisional and to be confirmed with the Louis Bolk Institute.
