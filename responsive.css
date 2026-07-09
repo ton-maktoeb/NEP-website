@@ -83,6 +83,10 @@
     scroll-snap-align: center;
   }
 
+  /* 5c) Founder photo: shorter (more landscape) on phones so both founders
+         and the Lekker Lupine logo stay in frame. */
+  .founders-figure { height: 240px !important; }
+
   /* 6) Methodology: let the 4-column coefficient table scroll
         sideways instead of squashing its columns. */
   .mtable { overflow-x: auto !important; }
