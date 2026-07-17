@@ -34,4 +34,4 @@ Then open the address it prints (usually http://localhost:3000).
 - The hero's left video and the "problem" photo are loaded from Pexels (free stock).
   Swap in your own footage in `index.html` when ready.
 - Impact figures (nitrogen saved) are provisional, pending confirmation with the
-  Louis Bolk Institute — see `methodology.html`.
+  Louis Bolk Institute — see `methodology.html`. 
