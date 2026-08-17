@@ -11,6 +11,7 @@ block: the comment header, the `<section>`, and everything inside it.
 | `foundation.html` | The No Egg Foundation (`id="foundation"`) | The foundation is not set up yet, so the page was claiming something not yet true. | The foundation actually exists and the profit-share wording is accurate. |
 | `evidence.html` | Backed by people who know the field (`id="evidence"`) | Awaiting approval from the Louis Bolk Institute to use their name and logo. | Louis Bolk gives written approval. |
 | `backed-by-line.html` | The "Backed by the Louis Bolk Institute and Lekker Lupine." line under the impact calculator | Same reason as `evidence.html` — it made the same endorsement claim in smaller type. | Louis Bolk gives written approval. |
+| `price-row.html` | The Price block ("Better for the planet. And, soon, for your wallet.") — the closing block of `#about` | Pulled ahead of launch (2026-08-17), price ambition not ready to publish. | The pricing story is ready to tell. |
 
 ## How to put one back
 
@@ -22,6 +23,12 @@ page runs: `partner` (the call to action) then `contact` (last).
 - **`evidence.html`** sat between `#partner` and `#contact`.
 
 If both go back, the original order was `partner` -> `foundation` -> `evidence` -> `contact`.
+
+`price-row.html` is not a section either. It was the last block inside `#about`
+(after the seed/plant/table loop figure, right before the section's closing tag).
+Its `.price-row` / `.price-img` layout rules still live in `responsive.css`, left
+in place so a restore needs no CSS work. It uses `assets/price-scramble-bowl.jpg`,
+which stays in the repo.
 
 `backed-by-line.html` is not a section. It goes back inside `#solution`, as the last
 child of the same `<div>` that holds the impact calculator — immediately before the
