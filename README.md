@@ -29,8 +29,9 @@ Then open the address it prints (usually http://localhost:3000).
 
 ## Notes
 
-- The contact form currently shows a thank-you message but does **not** send email
-  yet. Wire it to a form service (e.g. Formspree) to receive messages.
+- The contact form sends submissions to a Google Apps Script web app (see
+  `FORM_ENDPOINT` in `main.js`), which emails ton@nomadplant.co and logs to a
+  Google Sheet — the same setup as nomadplant.co.
 - The hero's left video and the "problem" photo are loaded from Pexels (free stock).
   Swap in your own footage in `index.html` when ready.
 - Impact figures (nitrogen saved) are provisional, pending confirmation with the
