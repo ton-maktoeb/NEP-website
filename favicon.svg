@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon: the lupin bean from the site's custom cursor, on brand aubergine. -->
+  <rect width="64" height="64" rx="14" fill="#26072E"/>
+  <g transform="rotate(-14 32 32)">
+    <ellipse cx="32" cy="32" rx="21" ry="16.5" fill="#F1FC7A"/>
+    <!-- the bean's dark "eye", like on the cursor -->
+    <circle cx="22.5" cy="26" r="4.4" fill="#26072E"/>
+  </g>
+</svg>
