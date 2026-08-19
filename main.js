@@ -216,7 +216,8 @@
     if (slider) {
       var MIN = 1, MAX = 50, TYPE_MAX = 1000000;
       var value = 3;
-      var typing = false; // true while the user is typing in the number field
+      var typing = false;   // true while the user is typing in a number field
+      var typingEl = null;  // which field they're typing in, so the other one can keep mirroring
       var fmt = function (n) { return n.toLocaleString("en-US").replace(/,/g, "."); };
       var fill = document.getElementById("impactFill");
       var thumb = document.getElementById("impactThumb");
@@ -230,13 +231,16 @@
         var animals = hens * (1 + IMPACT.malesPerHen);
         var nG = eggsYear * IMPACT.nSavedPerEggG;
         var pEl = document.getElementById("impPortions"); if (pEl) pEl.textContent = value;
-        // Show the value in the number field, unless the user is mid-typing.
+        // Show the value in both number fields (the stepper and the
+        // "Set your own" preset row), skipping the one being typed in.
+        var vTxt = String(value);
         var vInput = document.getElementById("impValueInput");
-        if (vInput && !typing) {
-          var vTxt = String(value);
+        if (vInput && !(typing && typingEl === vInput)) {
           vInput.value = vTxt;
           vInput.style.fontSize = vTxt.length <= 2 ? "26px" : (vTxt.length <= 4 ? "18px" : (vTxt.length <= 6 ? "14px" : "12px"));
         }
+        var cInput = document.getElementById("impCustomInput");
+        if (cInput && !(typing && typingEl === cInput)) cInput.value = vTxt;
         var hEl = document.getElementById("impHens"); if (hEl) hEl.textContent = fmt(Math.round(hens));
         var aEl = document.getElementById("impAnimals"); if (aEl) aEl.textContent = fmt(Math.round(animals));
         var nEl = document.getElementById("impN");
@@ -264,29 +268,34 @@
         value = Math.round(MIN + t * (MAX - MIN));
         updateImpact();
       };
-      // Number field: type an exact value. On phones this opens the
-      // device's native numeric keyboard (inputmode="numeric").
-      var vInput = document.getElementById("impValueInput");
-      if (vInput) {
+      // Number fields: type an exact value in the stepper or the "Set your
+      // own" row; they mirror each other. On phones this opens the device's
+      // native numeric keyboard (inputmode="numeric").
+      var wireNumberInput = function (el) {
+        if (!el) return;
         var commit = function () {
-          typing = false;
-          var digits = vInput.value.replace(/[^0-9]/g, "");
+          typing = false; typingEl = null;
+          var digits = el.value.replace(/[^0-9]/g, "");
           value = digits === "" ? MIN : Math.max(MIN, Math.min(TYPE_MAX, parseInt(digits, 10)));
           updateImpact();
         };
-        vInput.addEventListener("focus", function () { typing = true; vInput.select(); });
-        vInput.addEventListener("input", function () {
-          typing = true;
-          var digits = vInput.value.replace(/[^0-9]/g, "");
+        el.addEventListener("focus", function () { typing = true; typingEl = el; el.select(); });
+        el.addEventListener("input", function () {
+          typing = true; typingEl = el;
+          var digits = el.value.replace(/[^0-9]/g, "");
           if (digits === "") return; // wait until there's a number to read
           value = Math.max(MIN, Math.min(TYPE_MAX, parseInt(digits, 10)));
           updateImpact(); // update the results live without overwriting what they're typing
         });
-        vInput.addEventListener("blur", commit);
-        vInput.addEventListener("change", commit);
-        vInput.addEventListener("keydown", function (e) { if (e.key === "Enter") vInput.blur(); });
-      }
-      var stepBy = function (d) { typing = false; value = Math.max(MIN, Math.min(MAX, value + d)); updateImpact(); };
+        el.addEventListener("blur", commit);
+        el.addEventListener("change", commit);
+        el.addEventListener("keydown", function (e) { if (e.key === "Enter") el.blur(); });
+      };
+      wireNumberInput(document.getElementById("impValueInput"));
+      wireNumberInput(document.getElementById("impCustomInput"));
+      // Clamp to TYPE_MAX (not the slider's MAX): stepping from a big typed
+      // or preset value must not snap it back down to 50.
+      var stepBy = function (d) { typing = false; typingEl = null; value = Math.max(MIN, Math.min(TYPE_MAX, value + d)); updateImpact(); };
       var minusBtn = document.getElementById("impMinus");
       var plusBtn = document.getElementById("impPlus");
       if (minusBtn) minusBtn.addEventListener("click", function () { stepBy(-1); });
