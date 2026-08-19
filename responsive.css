@@ -106,11 +106,13 @@
   .price-row { grid-template-columns: .95fr 1.05fr !important; }
   .price-img { order: -1 !important; }
 
-  /* The Impact: results on the left, text on the right, so The Story
-     alternates sides (story right, circle left, impact right).
-     On phones the source order keeps the heading on top. */
-  .impact-row { grid-template-columns: 1.05fr .95fr !important; }
-  .impact-results { order: -1 !important; }
+  /* The Impact: input card on the left (spanning both rows, top-aligned),
+     text and results stacked on the right. Reads left-to-right as
+     cause -> effect, and the text stays right for The Story's rhythm.
+     On phones the source order stacks heading, input, results. */
+  .impact-input { grid-column: 1; grid-row: 1 / span 2; }
+  .impact-text { grid-column: 2; grid-row: 1; }
+  .impact-results { grid-column: 2; grid-row: 2; }
 }
 
 /* Solution cards: on wide screens there's room for all three, so show
