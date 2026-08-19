@@ -106,6 +106,12 @@
      (on phones it stays stacked text-first for a better reading order). */
   .price-row { grid-template-columns: .95fr 1.05fr !important; }
   .price-img { order: -1 !important; }
+
+  /* The Impact: results on the left, text on the right, so The Story
+     alternates sides (story right, circle left, impact right).
+     On phones the source order keeps the heading on top. */
+  .impact-row { grid-template-columns: 1.05fr .95fr !important; }
+  .impact-results { order: -1 !important; }
 }
 
 /* Solution cards: on wide screens there's room for all three, so show
