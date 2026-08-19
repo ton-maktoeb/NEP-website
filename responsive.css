@@ -45,6 +45,10 @@
     padding-top: 57px !important;
     padding-bottom: 57px !important;
   }
+  /* The products section ends in the full-bleed Scramble band, which carries
+     its own bottom padding — so the section itself ends at 0. */
+  #product { padding-bottom: 0 !important; }
+  .prod-band { margin-top: 48px !important; padding: 48px 0 57px !important; }
 
   /* 3) Hero nav: shrink the logo, swap the inline links for a
         hamburger button that opens the dropdown menu. */
