@@ -184,6 +184,17 @@
     // emails ton@nomadplant.co and logs it to a Google Sheet, then shows
     // the thank-you message. (no-cors: the browser can't read Google's
     // reply, which is fine — we confirm to the visitor optimistically.)
+    // CTA links marked with data-subject (Become a pilot customer, Supply &
+    // bulk) pre-fill the form's subject field on their way to #contact.
+    // The visitor can still overwrite it with their own subject.
+    document.querySelectorAll("a[data-subject]").forEach(function (a) {
+      a.addEventListener("click", function () {
+        document.querySelectorAll('.contact-form input[name="subject"]').forEach(function (s) {
+          s.value = a.getAttribute("data-subject");
+        });
+      });
+    });
+
     // Wires every .contact-form (one mid-page, one in the bottom Contact section).
     var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxxWmajDWehtBQtMMJXwgKzcguZtpBbi4MXU3-ZK-E6ljL5BrPeStFR8d-7F0Y8iA4gqA/exec";
     document.querySelectorAll(".contact-form").forEach(function (form) {
@@ -196,6 +207,11 @@
         form.querySelectorAll("input,textarea").forEach(function (el) {
           if (el.name) data.append(el.name, el.value);
         });
+        // The Apps Script only knows name/email/message, so fold the subject
+        // into the message too; that way it reaches the email and the sheet
+        // without touching the script.
+        var subj = (data.get("subject") || "").trim();
+        if (subj) data.set("message", "Subject: " + subj + "\n\n" + (data.get("message") || ""));
         fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: data }).catch(function () {});
 
         var status = form.querySelector(".contact-status");
