@@ -276,85 +276,6 @@
        </div>
      </div>
     </div>
-    <div style="margin-top:80px;padding-top:56px;border-top:1px solid rgba(241,252,122,.14)">
-      <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center">
-      <div>
-        <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">The impact</div>
-        <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:16px 0 0">Every switch adds up.</h2>
-        <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#D9CCDE;margin:18px 0 0;max-width:480px">Swap chicken eggs for lupin scramble and two things change: hens no longer live and die for your breakfast, and reactive nitrogen stops leaking into air and water. Move the slider to see what your own switch is worth in a year.</p>
-
-        <div style="margin-top:34px;background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;padding:26px 28px">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <label for="impValueInput" style="font:800 12px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F1FC7A">Portions of scramble per week</label>
-            <div style="position:relative;display:flex;align-items:center;gap:8px">
-              <button id="impMinus" type="button" aria-label="One fewer portion" style="width:38px;height:44px;flex:0 0 auto;border-radius:8px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;font:800 22px/1 'Poppins',sans-serif;cursor:pointer;transition:background .15s,color .15s" style-hover="background:#F1FC7A;color:#26072E">&minus;</button>
-              <input id="impValueInput" type="text" inputmode="numeric" pattern="[0-9]*" aria-label="Number of portions per week" value="3" style="width:64px;height:44px;flex:0 0 auto;background:#26072E;border:1px solid rgba(241,252,122,.35);border-radius:8px;color:#fff;font:900 26px/1 'Poppins',sans-serif;text-align:center;outline:none;transition:border-color .15s" style-focus="border-color:#F1FC7A">
-              <button id="impPlus" type="button" aria-label="One more portion" style="width:38px;height:44px;flex:0 0 auto;border-radius:8px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;font:800 22px/1 'Poppins',sans-serif;cursor:pointer;transition:background .15s,color .15s" style-hover="background:#F1FC7A;color:#26072E">+</button>
-              <span id="impPortions" style="display:none">3</span>
-            </div>
-          </div>
-          <div style="margin-top:16px">
-            <div style="font:800 10.5px/1.3 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9C8FA4;margin-bottom:10px">See it at scale — or set your own above</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-              <button class="imp-preset" type="button" data-portions="3" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">One person</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">3 a week</span></span>
-              </button>
-              <button class="imp-preset" type="button" data-portions="350" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M6 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path></svg>
-                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">A café</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">50 a day</span></span>
-              </button>
-              <button class="imp-preset" type="button" data-portions="1400" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M2 4v16"></path><path d="M2 8h18a2 2 0 0 1 2 2v10"></path><path d="M2 17h20"></path><path d="M6 8v9"></path></svg>
-                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">A hotel</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">200 a day</span></span>
-              </button>
-              <button class="imp-preset" type="button" data-portions="35000" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M12 22V8"></path><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path><circle cx="12" cy="5" r="3"></circle></svg>
-                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">A cruise line</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">5,000 a day</span></span>
-              </button>
-              <button class="imp-preset" type="button" data-portions="140000" style="grid-column:1 / -1;display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
-                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">An airport caterer</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">20,000 a day</span></span>
-              </button>
-            </div>
-          </div>
-          <div id="impactSlider" role="slider" tabindex="0" aria-label="Portions of scramble per week" aria-valuemin="1" aria-valuemax="50" aria-valuenow="3" style="position:relative;height:26px;margin-top:20px;cursor:pointer;touch-action:none;user-select:none;outline:none">
-            <div style="position:absolute;top:50%;left:0;right:0;height:8px;transform:translateY(-50%);border-radius:999px;background:rgba(241,252,122,.22)"></div>
-            <div id="impactFill" style="position:absolute;top:50%;left:0;width:6%;height:8px;transform:translateY(-50%);border-radius:999px;background:#F1FC7A;pointer-events:none"></div>
-            <div id="impactThumb" style="position:absolute;top:50%;left:6%;width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;background:#F1FC7A;border:3px solid #26072E;box-shadow:0 2px 10px rgba(0,0,0,.35);pointer-events:none"></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;font:500 11px/1 'Poppins',sans-serif;color:#9C8FA4;margin-top:6px"><span>1</span><span>50</span></div>
-          <div style="font:400 13px/1.5 'Poppins',sans-serif;color:#C9B9D0;margin-top:14px">Based on <b style="color:#fff">1 portion = 3 whole eggs</b>. For scramble the whole egg is used, so we count whole eggs, not just protein.</div>
-        </div>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:18px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
-          <div style="background:#F1FC7A;border-radius:12px;padding:26px 24px">
-            <div id="impHens" style="font:900 clamp(34px,4vw,52px)/1 'Poppins',sans-serif;color:#26072E;letter-spacing:-.02em">52</div>
-            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#26072E;margin-top:8px">hens spared from a life in the barn, per year</div>
-          </div>
-          <div style="background:#fff;border-radius:12px;padding:26px 24px">
-            <div id="impAnimals" style="font:900 clamp(34px,4vw,52px)/1 'Poppins',sans-serif;color:#26072E;letter-spacing:-.02em">104</div>
-            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#6E5C77;margin-top:8px">animal lives spared, counting the culled male chicks</div>
-          </div>
-        </div>
-        <div style="background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px">
-          <div>
-            <div id="impN" style="font:900 clamp(30px,3.4vw,44px)/1 'Poppins',sans-serif;color:#F1FC7A;letter-spacing:-.02em">≈ 16.4 kg</div>
-            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#D9CCDE;margin-top:8px">reactive nitrogen kept out of air and water, per year</div>
-          </div>
-          <span style="flex:0 0 auto;background:rgba(241,252,122,.14);color:#F1FC7A;font:800 10px/1.3 'Poppins',sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:8px 11px;border-radius:6px;text-align:center">Provisional<br>figure</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:2px">
-          <p style="font:400 12.5px/1.5 'Poppins',sans-serif;color:#9C8FA4;margin:0;max-width:340px">Nitrogen figure is a working estimate pending verification with the Louis Bolk Institute. Animal figures use ~300 eggs per hen per year.</p>
-          <a href="methodology.html" style="flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;background:transparent;color:#F1FC7A;font:800 13px/1 'Poppins',sans-serif;padding:12px 20px;border-radius:999px;border:1.5px solid rgba(241,252,122,.5);text-decoration:none;transition:background .18s,color .18s" style-hover="background:#F1FC7A;color:#26072E">How we calculate this
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-    </div>
   </div>
 </section>
 
@@ -545,6 +466,91 @@
         </g>
       </svg>
       <div style="position:absolute;left:0;right:0;bottom:18px;text-align:center;font:600 11px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9C8FA4">The loop never stops</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE IMPACT (part of The Story) ===================== -->
+<section id="impact" style="background:#26072E;color:#fff;padding:120px 0;scroll-margin-top:112px;font-family:'Poppins',sans-serif;border-top:1px solid rgba(241,252,122,.16)">
+  <div data-reveal="" style="max-width:1180px;margin:0 auto;padding:0 40px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+    <div>
+      <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center">
+      <div>
+        <div style="font:800 12.5px/1 'Poppins',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#F1FC7A">The impact</div>
+        <h2 style="font:800 clamp(32px,4vw,48px)/1.04 'Poppins',sans-serif;letter-spacing:-.015em;color:#fff;margin:16px 0 0">Every switch adds up.</h2>
+        <p style="font:400 16px/1.7 'Poppins',sans-serif;color:#D9CCDE;margin:18px 0 0;max-width:480px">Swap chicken eggs for lupin scramble and two things change: hens no longer live and die for your breakfast, and reactive nitrogen stops leaking into air and water. Move the slider to see what your own switch is worth in a year.</p>
+
+        <div style="margin-top:34px;background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;padding:26px 28px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <label for="impValueInput" style="font:800 12px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F1FC7A">Portions of scramble per week</label>
+            <div style="position:relative;display:flex;align-items:center;gap:8px">
+              <button id="impMinus" type="button" aria-label="One fewer portion" style="width:38px;height:44px;flex:0 0 auto;border-radius:8px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;font:800 22px/1 'Poppins',sans-serif;cursor:pointer;transition:background .15s,color .15s" style-hover="background:#F1FC7A;color:#26072E">&minus;</button>
+              <input id="impValueInput" type="text" inputmode="numeric" pattern="[0-9]*" aria-label="Number of portions per week" value="3" style="width:64px;height:44px;flex:0 0 auto;background:#26072E;border:1px solid rgba(241,252,122,.35);border-radius:8px;color:#fff;font:900 26px/1 'Poppins',sans-serif;text-align:center;outline:none;transition:border-color .15s" style-focus="border-color:#F1FC7A">
+              <button id="impPlus" type="button" aria-label="One more portion" style="width:38px;height:44px;flex:0 0 auto;border-radius:8px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;font:800 22px/1 'Poppins',sans-serif;cursor:pointer;transition:background .15s,color .15s" style-hover="background:#F1FC7A;color:#26072E">+</button>
+              <span id="impPortions" style="display:none">3</span>
+            </div>
+          </div>
+          <div style="margin-top:16px">
+            <div style="font:800 10.5px/1.3 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9C8FA4;margin-bottom:10px">See it at scale — or set your own above</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <button class="imp-preset" type="button" data-portions="3" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">One person</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">3 a week</span></span>
+              </button>
+              <button class="imp-preset" type="button" data-portions="350" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M6 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path></svg>
+                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">A café</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">50 a day</span></span>
+              </button>
+              <button class="imp-preset" type="button" data-portions="1400" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M2 4v16"></path><path d="M2 8h18a2 2 0 0 1 2 2v10"></path><path d="M2 17h20"></path><path d="M6 8v9"></path></svg>
+                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">A hotel</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">200 a day</span></span>
+              </button>
+              <button class="imp-preset" type="button" data-portions="35000" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M12 22V8"></path><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path><circle cx="12" cy="5" r="3"></circle></svg>
+                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">A cruise line</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">5,000 a day</span></span>
+              </button>
+              <button class="imp-preset" type="button" data-portions="140000" style="grid-column:1 / -1;display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;border:1px solid rgba(241,252,122,.35);background:#26072E;color:#F1FC7A;cursor:pointer;text-align:left;transition:background .15s,color .15s,border-color .15s" style-hover="background:#F1FC7A;color:#26072E;border-color:#F1FC7A">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+                <span style="display:flex;flex-direction:column;min-width:0"><span style="font:800 13.5px/1.15 'Poppins',sans-serif">An airport caterer</span><span style="font:600 11px/1.2 'Poppins',sans-serif;opacity:.7;margin-top:2px">20,000 a day</span></span>
+              </button>
+            </div>
+          </div>
+          <div id="impactSlider" role="slider" tabindex="0" aria-label="Portions of scramble per week" aria-valuemin="1" aria-valuemax="50" aria-valuenow="3" style="position:relative;height:26px;margin-top:20px;cursor:pointer;touch-action:none;user-select:none;outline:none">
+            <div style="position:absolute;top:50%;left:0;right:0;height:8px;transform:translateY(-50%);border-radius:999px;background:rgba(241,252,122,.22)"></div>
+            <div id="impactFill" style="position:absolute;top:50%;left:0;width:6%;height:8px;transform:translateY(-50%);border-radius:999px;background:#F1FC7A;pointer-events:none"></div>
+            <div id="impactThumb" style="position:absolute;top:50%;left:6%;width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;background:#F1FC7A;border:3px solid #26072E;box-shadow:0 2px 10px rgba(0,0,0,.35);pointer-events:none"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font:500 11px/1 'Poppins',sans-serif;color:#9C8FA4;margin-top:6px"><span>1</span><span>50</span></div>
+          <div style="font:400 13px/1.5 'Poppins',sans-serif;color:#C9B9D0;margin-top:14px">Based on <b style="color:#fff">1 portion = 3 whole eggs</b>. For scramble the whole egg is used, so we count whole eggs, not just protein.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="background:#F1FC7A;border-radius:12px;padding:26px 24px">
+            <div id="impHens" style="font:900 clamp(34px,4vw,52px)/1 'Poppins',sans-serif;color:#26072E;letter-spacing:-.02em">52</div>
+            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#26072E;margin-top:8px">hens spared from a life in the barn, per year</div>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:26px 24px">
+            <div id="impAnimals" style="font:900 clamp(34px,4vw,52px)/1 'Poppins',sans-serif;color:#26072E;letter-spacing:-.02em">104</div>
+            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#6E5C77;margin-top:8px">animal lives spared, counting the culled male chicks</div>
+          </div>
+        </div>
+        <div style="background:#3D1A47;border:1px solid rgba(241,252,122,.18);border-radius:12px;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+          <div>
+            <div id="impN" style="font:900 clamp(30px,3.4vw,44px)/1 'Poppins',sans-serif;color:#F1FC7A;letter-spacing:-.02em">≈ 16.4 kg</div>
+            <div style="font:700 13px/1.35 'Poppins',sans-serif;color:#D9CCDE;margin-top:8px">reactive nitrogen kept out of air and water, per year</div>
+          </div>
+          <span style="flex:0 0 auto;background:rgba(241,252,122,.14);color:#F1FC7A;font:800 10px/1.3 'Poppins',sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:8px 11px;border-radius:6px;text-align:center">Provisional<br>figure</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:2px">
+          <p style="font:400 12.5px/1.5 'Poppins',sans-serif;color:#9C8FA4;margin:0;max-width:340px">Nitrogen figure is a working estimate pending verification with the Louis Bolk Institute. Animal figures use ~300 eggs per hen per year.</p>
+          <a href="methodology.html" style="flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;background:transparent;color:#F1FC7A;font:800 13px/1 'Poppins',sans-serif;padding:12px 20px;border-radius:999px;border:1.5px solid rgba(241,252,122,.5);text-decoration:none;transition:background .18s,color .18s" style-hover="background:#F1FC7A;color:#26072E">How we calculate this
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </section>
