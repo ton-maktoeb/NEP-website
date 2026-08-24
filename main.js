@@ -257,8 +257,14 @@
         }
         var cInput = document.getElementById("impCustomInput");
         if (cInput && !(typing && typingEl === cInput)) cInput.value = vTxt;
-        var hEl = document.getElementById("impHens"); if (hEl) hEl.textContent = fmt(Math.round(hens));
-        var aEl = document.getElementById("impAnimals"); if (aEl) aEl.textContent = fmt(Math.round(animals));
+        // Below 10 we show one decimal, so a light user (1 portion/week =
+        // 0.35 hens) never sees a flat "0" that looks like a broken counter.
+        var fmtCount = function (n) {
+          if (n < 10) return n.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+          return fmt(Math.round(n));
+        };
+        var hEl = document.getElementById("impHens"); if (hEl) hEl.textContent = fmtCount(hens);
+        var aEl = document.getElementById("impAnimals"); if (aEl) aEl.textContent = fmtCount(animals);
         var nEl = document.getElementById("impN");
         if (nEl) {
           var kg = nG / 1000;
