@@ -12,6 +12,7 @@ block: the comment header, the `<section>`, and everything inside it.
 | `evidence.html` | Backed by people who know the field (`id="evidence"`) | Awaiting approval from the Louis Bolk Institute to use their name and logo. | Louis Bolk gives written approval. |
 | `backed-by-line.html` | The "Backed by the Louis Bolk Institute and Lekker Lupine." line under the impact calculator | Same reason as `evidence.html` — it made the same endorsement claim in smaller type. | Louis Bolk gives written approval. |
 | `price-row.html` | The Price block ("Better for the planet. And, soon, for your wallet.") — the closing block of `#about` | Pulled ahead of launch (2026-08-17), price ambition not ready to publish. | The pricing story is ready to tell. |
+| `middleware-password-gate.js` | The whole pre-launch password gate (Vercel Edge Middleware, was `middleware.js` in the repo root) | Site went public at launch (2026-08-24). | You want to gate a preview again: copy it back to `middleware.js`, restore `"@vercel/edge": "^1.2.1"` in package.json dependencies, and check the SITE_* env vars still exist in Vercel. |
 
 ## How to put one back
 
