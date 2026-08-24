@@ -223,7 +223,7 @@
     // Impact calculator: portions/week -> hens, animal lives, nitrogen saved per year.
     // NOTE: coefficients are provisional and to be confirmed with the Louis Bolk Institute.
     var IMPACT = {
-      eggsPerPortion: 3,      // scramble portion = 3 whole eggs
+      eggsPerPortion: 2,      // scramble portion = 2 whole eggs
       eggsPerHenYear: 300,    // eggs a laying hen produces per year (CBS/WUR)
       malesPerHen: 1,         // ~1 male layer chick culled per hen (historical 1:1)
       nSavedPerEggG: 3.0      // grams reactive N saved per whole egg replaced (PROVISIONAL)
