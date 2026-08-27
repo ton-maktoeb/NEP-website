@@ -41,10 +41,13 @@
     padding-left: 22px !important;
     padding-right: 22px !important;
   }
-  #problem, #solution, #product, #scaling, #about, #partner, #evidence, #impact {
+  #problem, #solution, #scaling, #about, #partner, #evidence, #impact {
     padding-top: 57px !important;
     padding-bottom: 57px !important;
   }
+  /* The products section starts with the full-width USP banner, so its own
+     top padding stays at zero on phones too. */
+  #product { padding-top: 0 !important; padding-bottom: 57px !important; }
   /* The full-bleed Fibers band inside the products section gets its own,
      tighter padding on phones. */
   .prod-band { margin-top: 48px !important; padding: 48px 0 !important; }

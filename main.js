@@ -167,6 +167,10 @@
       });
     }
 
+    // USP banner: clone the track content once so the scroll loops seamlessly.
+    var uspTrack = document.querySelector(".usp-track");
+    if (uspTrack) uspTrack.innerHTML += uspTrack.innerHTML;
+
     // Scroll reveals: fade sections in as they enter the viewport.
     var els = document.querySelectorAll("[data-reveal]");
     if ("IntersectionObserver" in window) {

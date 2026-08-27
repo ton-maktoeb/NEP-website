@@ -145,3 +145,15 @@
   text-transform: uppercase; color: var(--eyebrow);
 }
 .nm-mono { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.01em; }
+
+/* USP banner: the track holds two copies of the list (main.js clones it once)
+   and slides exactly one copy's width, so the loop is seamless. */
+.usp-track { animation: usp-scroll 30s linear infinite; }
+@keyframes usp-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* Respect users who turned motion off: show a static row instead. */
+@media (prefers-reduced-motion: reduce) {
+  .usp-track { animation: none; }
+}
