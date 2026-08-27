@@ -55,6 +55,12 @@
   /* Grid columns may never grow wider than the screen because one child
      (like a text input with its built-in default width) refuses to shrink. */
   .impact-row > * { min-width: 0; }
+
+  /* Footer on phones: the desktop's wide gaps stack up to a very tall
+     footer, so everything moves closer together. */
+  footer > div:first-child { gap: 26px !important; }
+  footer > div:first-child > div:last-child { gap: 10px 22px !important; }
+  footer > div:last-child { gap: 6px !important; margin-top: 24px !important; padding: 16px 22px 0 !important; }
   /* The full-bleed Fibers band inside the products section gets its own,
      tighter padding on phones. */
   .prod-band { margin-top: 20px !important; padding: 28px 0 !important; }
