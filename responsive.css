@@ -50,7 +50,7 @@
   #product { padding-top: 0 !important; padding-bottom: 57px !important; }
   /* The full-bleed Fibers band inside the products section gets its own,
      tighter padding on phones. */
-  .prod-band { margin-top: 48px !important; padding: 48px 0 !important; }
+  .prod-band { margin-top: 20px !important; padding: 28px 0 !important; }
 
   /* 3) Hero nav: shrink the logo, swap the inline links for a
         hamburger button that opens the dropdown menu. */
