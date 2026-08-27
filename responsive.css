@@ -52,6 +52,9 @@
      shared seam tight on phones as well. */
   #about { padding-bottom: 28px !important; }
   #impact { padding-top: 28px !important; }
+  /* Grid columns may never grow wider than the screen because one child
+     (like a text input with its built-in default width) refuses to shrink. */
+  .impact-row > * { min-width: 0; }
   /* The full-bleed Fibers band inside the products section gets its own,
      tighter padding on phones. */
   .prod-band { margin-top: 20px !important; padding: 28px 0 !important; }
@@ -94,8 +97,11 @@
   }
 
   /* 5c) Founder photo: shorter (more landscape) on phones so both founders
-         and the Lekker Lupine logo stay in frame. */
-  .founders-figure { height: 240px !important; }
+         and the Lekker Lupine logo stay in frame. The min-height:0 is needed
+         because the desktop layout gives the figure min-height:420px, and
+         min-height beats height — without this line the photo turns into a
+         tall crop that pushes the left founder out of frame. */
+  .founders-figure { height: 240px !important; min-height: 0 !important; }
 
   /* 6) Methodology: let the 4-column coefficient table scroll
         sideways instead of squashing its columns. */
