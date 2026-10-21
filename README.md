@@ -1,38 +1,26 @@
 # NoEggPlant website
 
-Marketing site for NoEggPlant — a plant-based egg scramble made from lupin.
+Right now the whole site is one image (a chicken in a cape riding an eggplant
+rocket) on a black page: `index.html` plus `assets/chicken-on-eggplant.jpg`.
+Hosted on Vercel, no build step.
 
-Built as a plain **static website**: HTML, CSS, and one JavaScript file. No build
-step and no framework, so it can be hosted anywhere that serves static files
-(this one is deployed on Vercel).
+## Getting the full site back
 
-## Files
+The complete earlier site (all sections, calculator, methodology page, contact
+form) is saved under the git tag `site-before-chicken`. To look at it:
 
-| File / folder      | What it is                                                      |
-|--------------------|----------------------------------------------------------------|
-| `index.html`       | The main page (hero, problem, solution, product, story, CTA).  |
-| `methodology.html` | The "how we calculate our impact" page.                        |
-| `styles.css`       | Brand colours and the self-hosted Poppins font.                |
-| `main.js`          | All interactivity (impact calculator, carousel, sticky nav…).  |
-| `assets/`          | Images, videos, and the custom cursor.                         |
-| `fonts/`           | Poppins font files.                                            |
+```bash
+git checkout site-before-chicken
+```
 
-## Editing the site
+To put it live again, restore those files onto `main`:
 
-Everything is hand-editable. To preview locally you need [Node.js](https://nodejs.org):
+```bash
+git checkout site-before-chicken -- .
+```
+
+## Preview locally
 
 ```bash
 npx serve .
 ```
-
-Then open the address it prints (usually http://localhost:3000).
-
-## Notes
-
-- The contact form sends submissions to a Google Apps Script web app (see
-  `FORM_ENDPOINT` in `main.js`), which emails ton@nomadplant.co and logs to a
-  Google Sheet — the same setup as nomadplant.co.
-- The hero's left video and the "problem" photo are loaded from Pexels (free stock).
-  Swap in your own footage in `index.html` when ready.
-- Impact figures (nitrogen saved) are provisional, pending confirmation with the
-  Louis Bolk Institute — see `methodology.html`. 
